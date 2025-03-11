@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 using Susalem.Mes.EntityFrameworkCore;
 
