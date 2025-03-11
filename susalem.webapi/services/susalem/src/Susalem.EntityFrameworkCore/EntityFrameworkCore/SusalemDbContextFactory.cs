@@ -4,6 +4,9 @@ using Microsoft.Extensions.Configuration;
 
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
+using Susalem.Mes.EntityFrameworkCore;
+
+using System;
 using System.IO;
 
 namespace Susalem.EntityFrameworkCore;
@@ -14,12 +17,16 @@ public class SusalemDbContextFactory : IDesignTimeDbContextFactory<SusalemDbCont
 {
     public SusalemDbContext CreateDbContext(string[] args)
     {
+        // https://www.npgsql.org/efcore/release-notes/6.0.html#opting-out-of-the-new-timestamp-mapping-logic
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         SusalemEfCoreEntityExtensionMappings.Configure();
 
         var configuration = BuildConfiguration();
-
+       // 更改为pgsql
         var builder = new DbContextOptionsBuilder<SusalemDbContext>()
-            .UseMySql(configuration.GetConnectionString("Default"), MySqlServerVersion.LatestSupportedServerVersion);
+           .UseNpgsql(configuration.GetConnectionString("Default"));
+        //var builder = new DbContextOptionsBuilder<SusalemDbContext>()
+        //    .UseMySql(configuration.GetConnectionString("Default"), MySqlServerVersion.LatestSupportedServerVersion);
 
         return new SusalemDbContext(builder.Options);
     }
