@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+
+using Susalem.Identity;
+
 using Volo.Abp.Account;
 using Volo.Abp.Modularity;
 using Volo.Abp.PermissionManagement;
@@ -9,7 +12,7 @@ namespace Susalem;
 [DependsOn(
     typeof(SusalemApplicationContractsModule),
     typeof(AbpAccountHttpApiClientModule),
-    typeof(Susalem.Identity.AbpIdentityHttpApiClientModule),
+    typeof(AbpIdentityHttpApiClientModule),
     typeof(AbpPermissionManagementHttpApiClientModule)
 )]
 public class SusalemHttpApiClientModule : AbpModule

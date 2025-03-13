@@ -2,7 +2,7 @@
 using Susalem.Mes.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.MySQL;
+using Volo.Abp.EntityFrameworkCore.PostgreSql;
 using Volo.Abp.Modularity;
 using Volo.Abp.OpenIddict.EntityFrameworkCore;
 using Volo.Abp.PermissionManagement.EntityFrameworkCore;
@@ -15,7 +15,7 @@ namespace Susalem.EntityFrameworkCore;
     typeof(AbpOpenIddictEntityFrameworkCoreModule),
     typeof(AbpPermissionManagementEntityFrameworkCoreModule),
     typeof(Susalem.Identity.EntityFrameworkCore.AbpIdentityEntityFrameworkCoreModule),
-    typeof(AbpEntityFrameworkCoreMySQLModule),
+    typeof(AbpEntityFrameworkCorePostgreSqlModule),
     typeof(AbpAuditLoggingEntityFrameworkCoreModule),
     typeof(MesEntityFrameworkCoreModule)
     )]
@@ -39,7 +39,7 @@ public class SusalemEntityFrameworkCoreModule : AbpModule
         {
             /* The main point to change your DBMS.
              * See also SusalemMigrationsDbContextFactory for EF Core tooling. */
-            options.UseMySQL();
+            options.UseNpgsql();
         });
 
     }
