@@ -49,6 +49,7 @@ namespace susalem.wpf
             containerRegistry.RegisterForNavigation<AlarmLightsView, AlarmLightsViewModel>(ListPages.Alarm);
             containerRegistry.RegisterForNavigation<MachineDetailView, MachineDetailViewModel>(DetailPages.Machine);
             containerRegistry.RegisterForNavigation<DigitalBoardView, DigitalBoardViewModel>(ListPages.DigitalBoard);  // 看板
+            containerRegistry.RegisterForNavigation<DiagramView, DiagramViewModel>();
 
         }
     }

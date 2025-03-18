@@ -8,17 +8,24 @@
     xmlns:local="clr-namespace:susalem.wpf.Views"
     xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:prism="http://prismlibrary.com/" xmlns:viewmodels="clr-namespace:susalem.wpf.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ShellWindowViewModel}"
-    Name="shell"   WindowState="Maximized"
-    Title="ShellWindow" 
-    Width="1280" 
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:viewmodels="clr-namespace:susalem.wpf.ViewModels"
+    Name="shell"
+    Title="ShellWindow"
+    Width="1280"
     Height="720"
+    d:DataContext="{d:DesignInstance Type=viewmodels:ShellWindowViewModel}"
     mah:ControlsHelper.CornerRadius="5"
-
+    NonActiveWindowTitleBrush="WhiteSmoke"
     ResizeMode="NoResize"
-    TitleBarHeight="0"
+    ShowMaxRestoreButton="True"
+    ShowMinButton="True"
+    TitleBarHeight="30"
     WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d" WindowTransitionsEnabled="False">
+    WindowState="Maximized"
+    WindowTitleBrush="WhiteSmoke"
+    WindowTransitionsEnabled="False"
+    mc:Ignorable="d">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=shell}" />
@@ -32,7 +39,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <DockPanel
                 Margin="0,20"
@@ -151,23 +158,31 @@
                     IsChecked="{Binding IsPaneOpen, ElementName=splitview}" />
             </DockPanel>
             <Border Grid.Column="1" Background="White">
-                <ContentControl x:Name="list" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ContentControl x:Name="list" Grid.Row="1" />
+                </Grid>
             </Border>
-            <Border Grid.Column="2" Background="AliceBlue" Visibility="Collapsed">
+            <Border
+                Grid.Column="2"
+                Background="AliceBlue"
+                Visibility="Collapsed">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="32" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <DockPanel
-                        
                         Background="AliceBlue"
                         LastChildFill="False"
                         MouseMove="WindowMove">
                         <mah:ToggleSwitch
-                           OnContent="Control"
                             IsOn="{Binding SystemMode}"
-                            OffContent="View" />
+                            OffContent="View"
+                            OnContent="Control" />
                         <UniformGrid DockPanel.Dock="Right" Rows="1">
                             <Button
                                 Name="min"
@@ -183,10 +198,10 @@
                         </UniformGrid>
                     </DockPanel>
                     <mah:SplitView
-                        PanePlacement="Right"
                         Name="splitview"
                         Grid.Row="1"
-                        PaneBackground="White">
+                        PaneBackground="White"
+                        PanePlacement="Right">
                         <mah:SplitView.Pane>
                             <ContentControl Name="pane" />
                         </mah:SplitView.Pane>

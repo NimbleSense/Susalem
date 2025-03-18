@@ -40,6 +40,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\WPF-Diagram\Source\Control\HeBianGu.Diagram.DrawingBox\HeBianGu.Diagram.DrawingBox.csproj" />
+    <ProjectReference Include="..\..\..\WPF-Diagram\Source\Control\HeBianGu.Diagram.Presenter.Workflow\HeBianGu.Diagram.Presenter.Workflow.csproj" />
+    <ProjectReference Include="..\..\..\WPF-Diagram\Source\Control\HeBianGu.Diagram.Presenter\HeBianGu.Diagram.Presenter.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="HeBianGu.Diagram.DrawingBox">
+      <HintPath>HeBianGu.Diagram.DrawingBox.dll</HintPath>
+    </Reference>
+    <Reference Include="HeBianGu.Diagram.Presenter">
+      <HintPath>HeBianGu.Diagram.Presenter.dll</HintPath>
+    </Reference>
+    <Reference Include="HeBianGu.Diagram.Presenter.Workflow">
+      <HintPath>HeBianGu.Diagram.Presenter.Workflow.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\dice.stl" />
     <Resource Include="Assets\map.png" />
     <Resource Include="Assets\space.jpg" />
