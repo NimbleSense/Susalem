@@ -43,21 +43,7 @@ namespace susalem.wpf.ViewModels
         void Loaded(MetroWindow metroWindow)
         {
             shell = metroWindow;
-        }
-
-        [RelayCommand]
-        async Task Travel()
-        {
-           var res=await shell.ShowMessageAsync("", "神秘人：你终于下定决心开启你的上位机之旅了吗？", MessageDialogStyle.AffirmativeAndNegative);
-            if (res==MessageDialogResult.Affirmative)
-            {
-                var travelWindow = new TravelWindow();
-                travelWindow.ShowDialog();
-            }
-            else
-            {
-                await shell.ShowMessageAsync("", "神秘人：很遗憾，希望你好好考虑...", MessageDialogStyle.Affirmative);
-            }
+            _navigationService.RequestNavigate(nameof(DiagramView));
         }
 
         [RelayCommand]
