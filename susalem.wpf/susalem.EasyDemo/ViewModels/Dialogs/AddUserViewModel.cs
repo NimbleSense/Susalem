@@ -1,7 +1,6 @@
 ﻿using HandyControl.Controls;
 using susalem.EasyDemo.Entities;
 using susalem.EasyDemo.Models;
-using susalem.EasyDemo.Services;
 using susalem.EasyDemo.Share;
 using HslCommunication.Secs.Types;
 using Prism.Commands;
@@ -14,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using susalem.EasyDemo.Services.IServices;
 
 namespace susalem.EasyDemo.ViewModels.Dialogs
 {

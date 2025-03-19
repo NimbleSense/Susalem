@@ -1,6 +1,5 @@
 ﻿using HandyControl.Collections;
 using susalem.EasyDemo.Entities;
-using susalem.EasyDemo.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -13,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
+using susalem.EasyDemo.Services.IServices;
 
 namespace susalem.EasyDemo.ViewModels
 {
@@ -162,7 +162,7 @@ namespace susalem.EasyDemo.ViewModels
         }
 
         /// <summary>
-        /// 刷新选择柜号下拉框
+        /// 异步获取
         /// </summary>
         /// <returns></returns>
         private async Task RefreshCabinets()

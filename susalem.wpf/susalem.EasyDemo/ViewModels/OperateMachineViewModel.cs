@@ -1,5 +1,4 @@
 ﻿using susalem.EasyDemo.Entities;
-using susalem.EasyDemo.Services;
 using HslCommunication;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -10,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using susalem.EasyDemo.Services.IServices;
 
 namespace susalem.EasyDemo.ViewModels
 {
@@ -28,8 +28,9 @@ namespace susalem.EasyDemo.ViewModels
             _historyService = historyService;
             _chamParaService = chamParaService;
         }
-
+        //私有属性,
         private string? machineId;
+        //绑定到view上的公有属性,封装私有属性
         public string? MachineId
         {
             get { return machineId; }
@@ -56,10 +57,11 @@ namespace susalem.EasyDemo.ViewModels
                     {
                         _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请检查该工匠品有无设置参数!" } }, null);
                     }
-
+                    //获取所有柜子的信息
                     List<CabinetInfoModel> cabinetInfoModels = _cabinetInfoService.FindAllCabinetInfos();
                     if (string.IsNullOrEmpty(MachineId) || string.IsNullOrEmpty(Count))
                     {
+                        _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请输入机台码以及数量!" } }, null);
                         return;
                     }
 
@@ -77,14 +79,20 @@ namespace susalem.EasyDemo.ViewModels
                         _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "柜子中没有这么多回温完成数量的该工匠品!" } }, null);
                         return;
                     }
+                    //可以开柜
                     else
                     {
+                        _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请取出工匠品!" } }, null);
                         foreach (var model in InfoModels)
                         {
+                            //开门?
                             OverAllContext.ModbusTcpLock.WriteAsync(model.LockAddress, true);
                             Thread.Sleep(200);
                             OverAllContext.ModbusTcpLock.WriteAsync(model.LockAddress, false);
 
+                            string ChamName = model.ChamName;
+                            string PNCode = model.PNCode;
+                            string MachineId = model.MachineId;
 
                             // 更新柜号信息表
                             model.ChamName = string.Empty;
@@ -100,9 +108,14 @@ namespace susalem.EasyDemo.ViewModels
 
                             HistoryModel historyModel = new HistoryModel();
                             historyModel.CabinetId = model.CabinetId.ToString();
-                            historyModel.PNCode = model.PNCode;
-                            historyModel.MachineId = model.MachineId;
-                            historyModel.Name = model.ChamName;
+                            historyModel.PNCode = PNCode;
+                            historyModel.MachineId = MachineId;
+                            historyModel.Name = ChamName;
+                            historyModel.Message = "回温结束取出";
+                            if (OverAllContext.User != null)
+                            {
+                                historyModel.Operater = OverAllContext.User.UserName;
+                            }
                             historyModel.OpenCabinetTime = DateTime.Now;
                             _historyService.AddHistory(historyModel);
 
