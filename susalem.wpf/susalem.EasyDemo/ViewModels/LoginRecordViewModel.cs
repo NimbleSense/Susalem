@@ -161,6 +161,7 @@ namespace susalem.EasyDemo.ViewModels
                     if (resultModel!=null)
                     {
                         OverAllContext.User = resultModel!;
+                        MainWindowViewModel.Username= "当前登录账户："+OverAllContext.User.UserName;
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "登录成功!" } }, null);

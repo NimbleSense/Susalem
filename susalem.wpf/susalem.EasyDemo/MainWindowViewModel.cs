@@ -7,6 +7,7 @@ using susalem.EasyDemo.Entities;
 using susalem.EasyDemo.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,13 @@ namespace susalem.EasyDemo
         private readonly IRegionManager _regionManager;
         private readonly ICabinetInfoService _cabinetInfoService;
         private CancellationTokenSource cts = new CancellationTokenSource();
-
+        private static string _username;
+        public static event EventHandler<PropertyChangedEventArgs> StaticPropertyChanged;
+        public static string Username
+        {
+            get { return _username; }
+            set { _username = value; StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(Username))); }
+        }
 
         public MainWindowViewModel(IRegionManager regionManager, ICabinetInfoService cabinetInfoService)
         {
@@ -33,10 +40,10 @@ namespace susalem.EasyDemo
             OverAllContext.ModbusTcpStatusLight = new ModbusTcpNet("192.168.1.101", 502);
             OverAllContext.ModbusTcpDoor = new ModbusTcpNet("192.168.1.100", 502);
             _cabinetInfoService = cabinetInfoService;
+            Username= "当前无登录账户";
 
             RefreshLight();
             RefreshIsTemperaturing();
-            
         }
 
         /// <summary>
