@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using susalem.EasyDemo.Services.IServices;
+using susalem.EasyDemo.Services;
 
 namespace susalem.EasyDemo.Services.ServicesImpl
 {

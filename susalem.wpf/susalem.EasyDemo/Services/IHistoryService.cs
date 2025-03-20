@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace susalem.EasyDemo.Services.IServices
+namespace susalem.EasyDemo.Services
 {
     public interface IHistoryService
     {
         List<HistoryModel> FindAllHistorys();
 
-        HistoryModel FindHistoryByTime(DateTime startTime,DateTime endTime);
+        HistoryModel FindHistoryByTime(DateTime startTime, DateTime endTime);
 
         HistoryModel FindHistoryById(string machinecode, string cabinetId);
 

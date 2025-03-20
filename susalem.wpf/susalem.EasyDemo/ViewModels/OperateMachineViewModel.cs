@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using susalem.EasyDemo.Services.IServices;
+using susalem.EasyDemo.Services;
 
 namespace susalem.EasyDemo.ViewModels
 {

@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
-using susalem.EasyDemo.Services.IServices;
+using susalem.EasyDemo.Services;
 
 namespace susalem.EasyDemo.ViewModels
 {

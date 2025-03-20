@@ -2,6 +2,7 @@
 using Prism.Regions;
 using Prism.Unity;
 using susalem.EasyDemo.Services;
+using susalem.EasyDemo.Services.ServicesImpl;
 using susalem.EasyDemo.ViewModels;
 using susalem.EasyDemo.ViewModels.Dialogs;
 using susalem.EasyDemo.Views;

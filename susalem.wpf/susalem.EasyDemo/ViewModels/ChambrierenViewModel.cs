@@ -13,6 +13,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Prism.Regions;
+using susalem.EasyDemo.Services;
 
 namespace susalem.EasyDemo.ViewModels
 {

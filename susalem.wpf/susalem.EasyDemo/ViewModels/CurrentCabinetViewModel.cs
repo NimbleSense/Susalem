@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using susalem.EasyDemo.Services.IServices;
+using susalem.EasyDemo.Services;
 using System.Diagnostics;
 
 namespace susalem.EasyDemo.ViewModels
