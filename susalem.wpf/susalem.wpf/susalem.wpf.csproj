@@ -39,17 +39,15 @@
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>
 
-
-
   <ItemGroup>
     <Reference Include="HeBianGu.Diagram.DrawingBox">
-      <HintPath>HeBianGu.Diagram.DrawingBox.dll</HintPath>
+      <HintPath>bin\Debug\net8.0-windows7.0\HeBianGu.Diagram.DrawingBox.dll</HintPath>
     </Reference>
     <Reference Include="HeBianGu.Diagram.Presenter">
-      <HintPath>HeBianGu.Diagram.Presenter.dll</HintPath>
+      <HintPath>bin\Debug\net8.0-windows7.0\HeBianGu.Diagram.Presenter.dll</HintPath>
     </Reference>
     <Reference Include="HeBianGu.Diagram.Presenter.Workflow">
-      <HintPath>HeBianGu.Diagram.Presenter.Workflow.dll</HintPath>
+      <HintPath>bin\Debug\net8.0-windows7.0\HeBianGu.Diagram.Presenter.Workflow.dll</HintPath>
     </Reference>
   </ItemGroup>
 
