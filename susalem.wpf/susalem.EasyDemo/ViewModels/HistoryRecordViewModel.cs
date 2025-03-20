@@ -50,6 +50,7 @@ namespace susalem.EasyDemo.ViewModels
                 PNCode = p.PNCode,
                 SerialNum = p.SerialNum,
                 OpenCabinetTime = p.OpenCabinetTime,
+                Message = p.Message,
 
             });
 
@@ -71,6 +72,7 @@ namespace susalem.EasyDemo.ViewModels
             {
                 historyModelList = historyModelList.Where(p => p.MachineId == MachineId);
             }
+
 
             DataList = new ObservableCollection<HistoryRecordDataList>(historyModelList);
         }
@@ -142,6 +144,12 @@ namespace susalem.EasyDemo.ViewModels
         {
             get { return _openCabinetTime; }
             set { _openCabinetTime = value; RaisePropertyChanged(); }
+        }
+        private string?_message;
+        public string? Message
+        {
+            get { return _message; }
+            set { _message = value; RaisePropertyChanged(); }
         }
 
     }

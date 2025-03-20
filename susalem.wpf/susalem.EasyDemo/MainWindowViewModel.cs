@@ -1,5 +1,6 @@
 ﻿using HslCommunication.ModBus;
 using Prism.Commands;
+using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
 using susalem.EasyDemo.Entities;
@@ -9,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace susalem.EasyDemo
@@ -23,6 +25,7 @@ namespace susalem.EasyDemo
         public MainWindowViewModel(IRegionManager regionManager, ICabinetInfoService cabinetInfoService)
         {
             _regionManager = regionManager;
+           
             //OverAllContext.modbusTcpServer = new ModbusTcpServer();
             //OverAllContext.modbusTcpServer.ServerStart(502, true);
 
@@ -33,6 +36,7 @@ namespace susalem.EasyDemo
 
             RefreshLight();
             RefreshIsTemperaturing();
+            
         }
 
         /// <summary>
@@ -136,7 +140,11 @@ namespace susalem.EasyDemo
         {
             get => new DelegateCommand(() =>
             {
-                _regionManager.Regions["MainRegion"].RequestNavigate("CurrentCabinetView");
+                var region = _regionManager.Regions["MainRegion"];
+                //给region添加事件，当视图跳转完成触发
+                region.NavigationService.Navigated += OnNavigated;
+                _regionManager.Regions["MainRegion"].RequestNavigate("LoginRecordView");
+                
             });
         }
 
@@ -202,6 +210,33 @@ namespace susalem.EasyDemo
 
             });
         }
+
+
+
+
+        private void OnNavigated(object sender, RegionNavigationEventArgs e)
+        {
+            // 检查导航跳转条件
+            if (ShouldCancelNavigation(e.Uri))
+            {
+                NavigationParameters keyValuePairs = new NavigationParameters();
+                _regionManager.Regions["MainRegion"].RequestNavigate("LoginRecordView", keyValuePairs);
+                MessageBox.Show("请先登录账号");
+                //e.Cancel = true; // 取消导航
+                // 可以在此处添加提示逻辑
+            }
+        }
+
+        private bool ShouldCancelNavigation(Uri uri)
+        {
+            // 账号为空并且uri不是登录界面时，取消导航
+            if (OverAllContext.User == null && !uri.OriginalString.Equals("LoginRecordView"))
+            {
+                return true;
+            }
+            return false;
+        }
+
 
     }
 }

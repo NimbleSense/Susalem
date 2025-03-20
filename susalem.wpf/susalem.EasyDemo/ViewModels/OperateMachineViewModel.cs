@@ -60,6 +60,7 @@ namespace susalem.EasyDemo.ViewModels
                     List<CabinetInfoModel> cabinetInfoModels = _cabinetInfoService.FindAllCabinetInfos();
                     if (string.IsNullOrEmpty(MachineId) || string.IsNullOrEmpty(Count))
                     {
+                        _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请填写完整信息!" } }, null);
                         return;
                     }
 
@@ -79,6 +80,7 @@ namespace susalem.EasyDemo.ViewModels
                     }
                     else
                     {
+                        _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请取出工匠品!" } }, null);
                         foreach (var model in InfoModels)
                         {
                             OverAllContext.ModbusTcpLock.WriteAsync(model.LockAddress, true);
@@ -102,6 +104,7 @@ namespace susalem.EasyDemo.ViewModels
                             historyModel.CabinetId = model.CabinetId.ToString();
                             historyModel.PNCode = model.PNCode;
                             historyModel.MachineId = model.MachineId;
+                            historyModel.Message= "回温结束取出";
                             historyModel.Name = model.ChamName;
                             historyModel.OpenCabinetTime = DateTime.Now;
                             _historyService.AddHistory(historyModel);

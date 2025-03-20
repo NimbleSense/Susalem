@@ -39,11 +39,7 @@
     <PackageReference Include="Prism.Unity" Version="8.1.97" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\WPF-Diagram\Source\Control\HeBianGu.Diagram.DrawingBox\HeBianGu.Diagram.DrawingBox.csproj" />
-    <ProjectReference Include="..\..\..\WPF-Diagram\Source\Control\HeBianGu.Diagram.Presenter.Workflow\HeBianGu.Diagram.Presenter.Workflow.csproj" />
-    <ProjectReference Include="..\..\..\WPF-Diagram\Source\Control\HeBianGu.Diagram.Presenter\HeBianGu.Diagram.Presenter.csproj" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <Reference Include="HeBianGu.Diagram.DrawingBox">
