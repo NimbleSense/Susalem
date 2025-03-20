@@ -3,6 +3,7 @@ using Prism.Commands;
 using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using susalem.EasyDemo.Entities;
 using susalem.EasyDemo.Services;
 using System;
@@ -19,6 +20,7 @@ namespace susalem.EasyDemo
     public class MainWindowViewModel : BindableBase
     {
         private readonly IRegionManager _regionManager;
+        private readonly IDialogService _dialogService;
         private readonly ICabinetInfoService _cabinetInfoService;
         private CancellationTokenSource cts = new CancellationTokenSource();
         private static string _username;
@@ -29,10 +31,10 @@ namespace susalem.EasyDemo
             set { _username = value; StaticPropertyChanged?.Invoke(null, new PropertyChangedEventArgs(nameof(Username))); }
         }
 
-        public MainWindowViewModel(IRegionManager regionManager, ICabinetInfoService cabinetInfoService)
+        public MainWindowViewModel(IRegionManager regionManager, ICabinetInfoService cabinetInfoService, IDialogService dialogService)
         {
             _regionManager = regionManager;
-           
+            _dialogService = dialogService;
             //OverAllContext.modbusTcpServer = new ModbusTcpServer();
             //OverAllContext.modbusTcpServer.ServerStart(502, true);
 
@@ -228,7 +230,7 @@ namespace susalem.EasyDemo
             {
                 NavigationParameters keyValuePairs = new NavigationParameters();
                 _regionManager.Regions["MainRegion"].RequestNavigate("LoginRecordView", keyValuePairs);
-                MessageBox.Show("请先登录账号");
+                _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请登录账户!" } }, null);
                 //e.Cancel = true; // 取消导航
                 // 可以在此处添加提示逻辑
             }
