@@ -1,5 +1,6 @@
 ﻿using susalem.EasyDemo.Entities;
 using susalem.EasyDemo.Repository;
+using susalem.EasyDemo.Services.IServices;
 using System;
 using System.Collections.Generic;
 using System.Data;

@@ -2,7 +2,6 @@
 using Prism.Regions;
 using Prism.Unity;
 using susalem.EasyDemo.Services;
-using susalem.EasyDemo.Services.ServicesImpl;
 using susalem.EasyDemo.ViewModels;
 using susalem.EasyDemo.ViewModels.Dialogs;
 using susalem.EasyDemo.Views;
@@ -30,6 +29,7 @@ namespace susalem.EasyDemo
             containerRegistry.Register<IHistoryService, HistoryService>();
             containerRegistry.Register<IChamParaService, ChamParaService>();
             containerRegistry.Register<ICabinetInfoService, CabinetInfoService>();
+
             containerRegistry.RegisterForNavigation<MainWindow, MainWindowViewModel>();
 
             containerRegistry.RegisterForNavigation<AlarmRecordView, AlarmRecordViewModel>();

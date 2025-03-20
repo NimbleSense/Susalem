@@ -1,5 +1,4 @@
 ﻿using susalem.EasyDemo.Entities;
-using susalem.EasyDemo.Services;
 using HslCommunication;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -123,6 +122,11 @@ namespace susalem.EasyDemo.ViewModels
                     historyModel.MachineId = ChemicalParaModel.MachineId;
                     historyModel.Message = "开柜回温"; 
                     historyModel.Name = ChemicalParaModel.Name;
+                    historyModel.Message = "开始回温";
+                    if (OverAllContext.User != null)
+                    {
+                        historyModel.Operater = OverAllContext.User.UserName;
+                    }
                     historyModel.OpenCabinetTime = DateTime.Now;
                     _historyService.AddHistory(historyModel);
 

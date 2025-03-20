@@ -133,6 +133,10 @@
                     Header="操作动作" />
                 <DataGridTextColumn
                     Width="*"
+                    Binding="{Binding Operater}"
+                    Header="操作人" />
+                <DataGridTextColumn
+                    Width="*"
                     Binding="{Binding OpenCabinetTime}"
                     Header="开柜时间" />
             </DataGrid.Columns>

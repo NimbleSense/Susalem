@@ -1,5 +1,4 @@
 ﻿using susalem.EasyDemo.Entities;
-using susalem.EasyDemo.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -9,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using susalem.EasyDemo.Services.IServices;
 
 namespace susalem.EasyDemo.ViewModels
 {
@@ -51,6 +51,7 @@ namespace susalem.EasyDemo.ViewModels
                 SerialNum = p.SerialNum,
                 OpenCabinetTime = p.OpenCabinetTime,
                 Message = p.Message,
+                Operater = p.Operater,
 
             });
 
@@ -72,7 +73,6 @@ namespace susalem.EasyDemo.ViewModels
             {
                 historyModelList = historyModelList.Where(p => p.MachineId == MachineId);
             }
-
 
             DataList = new ObservableCollection<HistoryRecordDataList>(historyModelList);
         }
@@ -138,18 +138,24 @@ namespace susalem.EasyDemo.ViewModels
             get { return _machineId; }
             set { _machineId = value; RaisePropertyChanged(); }
         }
+        private string? _message;
+        public string? Message
+        {
+            get { return _message; }
+            set { _message = value; RaisePropertyChanged(); }
+        }
+        private string? _operater;
+        public string? Operater
+        {
+            get { return _operater; }
+            set { _operater = value; RaisePropertyChanged(); }
+        }
 
         private DateTime? _openCabinetTime;
         public DateTime? OpenCabinetTime
         {
             get { return _openCabinetTime; }
             set { _openCabinetTime = value; RaisePropertyChanged(); }
-        }
-        private string?_message;
-        public string? Message
-        {
-            get { return _message; }
-            set { _message = value; RaisePropertyChanged(); }
         }
 
     }

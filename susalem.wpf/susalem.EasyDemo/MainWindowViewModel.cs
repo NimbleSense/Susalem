@@ -4,7 +4,7 @@ using Prism.Ioc;
 using Prism.Mvvm;
 using Prism.Regions;
 using susalem.EasyDemo.Entities;
-using susalem.EasyDemo.Services;
+using susalem.EasyDemo.Services.IServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace susalem.EasyDemo.Services
+namespace susalem.EasyDemo.Services.IServices
 {
     public interface ICabinetInfoService
     {

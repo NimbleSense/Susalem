@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using susalem.EasyDemo.Services.IServices;
 
 namespace susalem.EasyDemo.Services.ServicesImpl
 {
@@ -119,6 +120,10 @@ namespace susalem.EasyDemo.Services.ServicesImpl
                         //    resultModel.Data!.RealName = hc.Roles!.Where(r => r.RoleId == roleId).FirstOrDefault()!.RoleName;
                         //    resultModel.Data!.Level = hc.Roles!.Where(r => r.RoleId == roleId).FirstOrDefault()!.Level;
                         //}
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
                 catch (Exception ex)

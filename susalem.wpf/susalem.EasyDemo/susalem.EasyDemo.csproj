@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="image\bg-存放实物实时状态.png" />
+    <None Remove="image\bg_currentState.png" />
     <None Remove="image\btn_bg.png" />
     <None Remove="image\icon_warning-1.png" />
     <None Remove="image\icon_warning-2.png" />
@@ -19,6 +21,7 @@
     <None Remove="image\icon_报警记录.png" />
     <None Remove="image\icon_账户切换.png" />
     <None Remove="image\tit_bg.png" />
+    <None Remove="image\关闭.png" />
     <None Remove="image\大国工匠.jpg" />
   </ItemGroup>
 
@@ -41,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="image\bg-存放实物实时状态.png" />
     <Resource Include="image\btn_bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -71,6 +75,7 @@
     <Resource Include="image\tit_bg.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="image\关闭.png" />
     <Resource Include="image\大国工匠.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
