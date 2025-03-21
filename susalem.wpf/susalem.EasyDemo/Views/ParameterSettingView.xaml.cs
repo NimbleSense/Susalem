@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace susalem.EasyDemo.Views
         public ParameterSettingView()
         {
             InitializeComponent();
+            
+            Debug.WriteLine("页面已初始化"); // 多次切换时观察是否重复输出
         }
+        // YourPage.xaml.cs
+
     }
+
 }

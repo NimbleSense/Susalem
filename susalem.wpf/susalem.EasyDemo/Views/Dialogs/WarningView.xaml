@@ -23,6 +23,6 @@
                 Stretch="Fill" />
         </Button>
         <Image Grid.Row="1" Source="pack://application:,,,/image/icon_warning-1.png" />
-        <TextBlock Text="{Binding Text}" />
+        <TextBlock Grid.Row="2" TextAlignment="Center" Text="{Binding Text}" />
     </Grid>
 </UserControl>

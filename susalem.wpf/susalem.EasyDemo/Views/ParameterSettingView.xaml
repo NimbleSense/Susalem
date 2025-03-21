@@ -23,6 +23,13 @@
         </Style>
     </UserControl.Resources>
     <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="/susalem.EasyDemo;component/Resources/ValidationTextBoxStyle.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />
@@ -46,7 +53,10 @@
             Grid.Column="1"
             Width="200"
             Height="50"
-            Text="{Binding Name}" />
+            VerticalContentAlignment="Center"
+            Style="{StaticResource ValidationTextBoxStyle}"
+            Tag="{Binding ChemicalPara.IsFormValid, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding ChemicalPara.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" />
 
         <TextBlock
             Grid.Row="1"
@@ -58,7 +68,9 @@
             Grid.Column="1"
             Width="200"
             Height="50"
-            Text="{Binding PNCode}" />
+            VerticalContentAlignment="Center"
+            Tag="{Binding ChemicalPara.IsFormValid, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding ChemicalPara.PNCode, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock
             Grid.Row="2"
@@ -70,7 +82,9 @@
             Grid.Column="2"
             Width="200"
             Height="50"
-            Text="{Binding SerialNum}" />
+            VerticalContentAlignment="Center"
+            Tag="{Binding ChemicalPara.IsFormValid, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding ChemicalPara.SerialNum, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock
             Grid.Row="3"
@@ -82,7 +96,9 @@
             Grid.Column="2"
             Width="200"
             Height="50"
-            Text="{Binding ReheatingTime}" />
+            VerticalContentAlignment="Center"
+            Tag="{Binding ChemicalPara.IsFormValid, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding ChemicalPara.ReheatingTime, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock
             Grid.Row="4"
@@ -94,7 +110,9 @@
             Grid.Column="2"
             Width="200"
             Height="50"
-            Text="{Binding ExpirationDate}" />
+            VerticalContentAlignment="Center"
+            Tag="{Binding ChemicalPara.IsFormValid, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding ChemicalPara.ExpirationDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock
             Grid.Row="5"
@@ -106,7 +124,9 @@
             Grid.Column="2"
             Width="200"
             Height="50"
-            Text="{Binding MachineId}" />
+            VerticalContentAlignment="Center"
+            Tag="{Binding ChemicalPara.IsFormValid, UpdateSourceTrigger=PropertyChanged}"
+            Text="{Binding ChemicalPara.MachineId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
         <TextBlock
             Grid.Row="6"
@@ -125,7 +145,7 @@
             Width="200"
             Height="50"
             ItemsSource="{Binding Cabinets}"
-            SelectedItem="{Binding CabinetId}"
+            SelectedItem="{Binding ChemicalPara.CabinetId}"
             Style="{StaticResource ComboBoxBaseStyle}" />
 
         <Button
@@ -136,6 +156,7 @@
             HorizontalAlignment="Center"
             Command="{Binding AddCommand}"
             Content="添加"
+            IsEnabled="{Binding ChemicalPara.IsValidated}"
             FontSize="22" />
     </Grid>
 </UserControl>

@@ -1,23 +1,24 @@
 ﻿using susalem.EasyDemo.Entities;
 using susalem.EasyDemo.Repository;
+using susalem.EasyDemo.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace susalem.EasyDemo.Services
+namespace susalem.EasyDemo.Services.ServicesImpl
 {
-    public class RoleService : IRoleService
+    public class HistoryService : IHistoryService
     {
-        public int AddRole(RoleModel role)
+        public int AddHistory(HistoryModel model)
         {
             int nRet = 0;
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    hc.Roles?.Add(role);
+                    hc.Historys?.Add(model);
                     hc.SaveChanges();
                 }
                 catch (Exception ex)
@@ -27,48 +28,14 @@ namespace susalem.EasyDemo.Services
             return nRet;
         }
 
-        public int DeleteRole(int roleId)
+        public List<HistoryModel> FindAllHistorys()
         {
-            int nRet = 0;
+            List<HistoryModel> result = new List<HistoryModel>();
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    hc.Roles?.Remove(hc.Roles.Where(u => u.RoleId == roleId).FirstOrDefault()!);
-                    hc.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                }
-            };
-            return nRet;
-        }
-
-        public int EditRole(RoleModel role)
-        {
-            int nRet = 0;
-            using (JccRepository hc = new JccRepository())
-            {
-                try
-                {
-                    hc.Roles?.Update(role);
-                    hc.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                }
-            };
-            return nRet;
-        }
-
-        public List<RoleModel> FindAllRole()
-        {
-            List<RoleModel> result  = new List<RoleModel>();
-            using (JccRepository hc = new JccRepository())
-            {
-                try
-                {
-                    result = hc.Roles?.Select(r => r).ToList();
+                    result = hc.Historys?.Select(r => r).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -77,20 +44,36 @@ namespace susalem.EasyDemo.Services
             return result;
         }
 
-        public int FindMaxRoleId()
+        public HistoryModel FindHistoryById(string machinecode, string cabinetId)
         {
-            int nRet = 0;
+            HistoryModel result = new HistoryModel();
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    nRet = hc.Roles.Select(u => u.RoleId).Max();
+                    result = hc.Historys?.Where(r => r.CabinetId == cabinetId && r.MachineId == machinecode).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {
                 }
             };
-            return nRet;
+            return result;
+        }
+
+        public HistoryModel FindHistoryByTime(DateTime startTime, DateTime endTime)
+        {
+            HistoryModel result = new HistoryModel();
+            using (JccRepository hc = new JccRepository())
+            {
+                try
+                {
+                    result = hc.Historys?.Where(r => r.OpenCabinetTime >= startTime && r.OpenCabinetTime <= endTime).FirstOrDefault();
+                }
+                catch (Exception ex)
+                {
+                }
+            };
+            return result;
         }
     }
 }

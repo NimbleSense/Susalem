@@ -11,7 +11,7 @@ namespace susalem.EasyDemo.Services
     {
         List<HistoryModel> FindAllHistorys();
 
-        HistoryModel FindHistoryByTime(DateTime startTime,DateTime endTime);
+        HistoryModel FindHistoryByTime(DateTime startTime, DateTime endTime);
 
         HistoryModel FindHistoryById(string machinecode, string cabinetId);
 

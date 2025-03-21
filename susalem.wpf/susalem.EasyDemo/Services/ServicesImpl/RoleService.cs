@@ -1,24 +1,24 @@
 ﻿using susalem.EasyDemo.Entities;
 using susalem.EasyDemo.Repository;
+using susalem.EasyDemo.Services;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace susalem.EasyDemo.Services
+namespace susalem.EasyDemo.Services.ServicesImpl
 {
-    public class ChamParaService : IChamParaService
+    public class RoleService : IRoleService
     {
-        public int AddPara(ChemicalParaModel para)
+        public int AddRole(RoleModel role)
         {
             int nRet = 0;
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    hc.ChemicalParas?.Add(para);
+                    hc.Roles?.Add(role);
                     hc.SaveChanges();
                 }
                 catch (Exception ex)
@@ -28,14 +28,14 @@ namespace susalem.EasyDemo.Services
             return nRet;
         }
 
-        public int DeletePara(int id)
+        public int DeleteRole(int roleId)
         {
             int nRet = 0;
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    hc.ChemicalParas?.Remove(hc.ChemicalParas.Where(u => u.Id  == id).FirstOrDefault()!);
+                    hc.Roles?.Remove(hc.Roles.Where(u => u.RoleId == roleId).FirstOrDefault()!);
                     hc.SaveChanges();
                 }
                 catch (Exception ex)
@@ -45,14 +45,14 @@ namespace susalem.EasyDemo.Services
             return nRet;
         }
 
-        public int EditPara(ChemicalParaModel para)
+        public int EditRole(RoleModel role)
         {
             int nRet = 0;
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    hc.ChemicalParas?.Update(para);
+                    hc.Roles?.Update(role);
                     hc.SaveChanges();
                 }
                 catch (Exception ex)
@@ -62,14 +62,14 @@ namespace susalem.EasyDemo.Services
             return nRet;
         }
 
-        public List<ChemicalParaModel> FindAllParas()
+        public List<RoleModel> FindAllRole()
         {
-            List<ChemicalParaModel> result = new List<ChemicalParaModel>();
+            List<RoleModel> result = new List<RoleModel>();
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    result = hc.ChemicalParas?.Select(r => r).ToList();
+                    result = hc.Roles?.Select(r => r).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -78,20 +78,20 @@ namespace susalem.EasyDemo.Services
             return result;
         }
 
-        public ChemicalParaModel FindParaById(int id)
+        public int FindMaxRoleId()
         {
-            ChemicalParaModel result = new ChemicalParaModel();
+            int nRet = 0;
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    result = hc.ChemicalParas?.Where(r => r.Id == id).FirstOrDefault();
+                    nRet = hc.Roles.Select(u => u.RoleId).Max();
                 }
                 catch (Exception ex)
                 {
                 }
             };
-            return result;
+            return nRet;
         }
     }
 }

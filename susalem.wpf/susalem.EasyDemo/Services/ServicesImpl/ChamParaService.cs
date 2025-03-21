@@ -1,23 +1,25 @@
 ﻿using susalem.EasyDemo.Entities;
 using susalem.EasyDemo.Repository;
+using susalem.EasyDemo.Services;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace susalem.EasyDemo.Services
+namespace susalem.EasyDemo.Services.ServicesImpl
 {
-    public class CabinetInfoService : ICabinetInfoService
+    public class ChamParaService : IChamParaService
     {
-        public int AddCabinetInfo(CabinetInfoModel info)
+        public int AddPara(ChemicalParaModel para)
         {
             int nRet = 0;
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    hc.CabinetInfos?.Add(info);
+                    hc.ChemicalParas?.Add(para);
                     hc.SaveChanges();
                 }
                 catch (Exception ex)
@@ -27,14 +29,14 @@ namespace susalem.EasyDemo.Services
             return nRet;
         }
 
-        public int EditCabinetInfo(CabinetInfoModel info)
+        public int DeletePara(int id)
         {
             int nRet = 0;
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    hc.CabinetInfos?.Update(info);
+                    hc.ChemicalParas?.Remove(hc.ChemicalParas.Where(u => u.Id == id).FirstOrDefault()!);
                     hc.SaveChanges();
                 }
                 catch (Exception ex)
@@ -44,15 +46,15 @@ namespace susalem.EasyDemo.Services
             return nRet;
         }
 
-        public async Task<int> EditCabinetInfoList(IEnumerable<CabinetInfoModel> infoList)
+        public int EditPara(ChemicalParaModel para)
         {
             int nRet = 0;
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    hc.CabinetInfos!.UpdateRange(infoList);
-                    nRet = await hc.SaveChangesAsync();
+                    hc.ChemicalParas?.Update(para);
+                    hc.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -61,14 +63,14 @@ namespace susalem.EasyDemo.Services
             return nRet;
         }
 
-        public List<CabinetInfoModel> FindAllCabinetInfos()
+        public List<ChemicalParaModel> FindAllParas()
         {
-            List<CabinetInfoModel> result = new List<CabinetInfoModel>();
+            List<ChemicalParaModel> result = new List<ChemicalParaModel>();
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    result = hc.CabinetInfos?.Select(r => r).ToList();
+                    result = hc.ChemicalParas?.Select(r => r).ToList();
                 }
                 catch (Exception ex)
                 {
@@ -77,14 +79,14 @@ namespace susalem.EasyDemo.Services
             return result;
         }
 
-        public CabinetInfoModel? FindCabinetInfoByCabinetCode(int id)
+        public ChemicalParaModel FindParaById(int id)
         {
-            CabinetInfoModel? result = new CabinetInfoModel();
+            ChemicalParaModel result = new ChemicalParaModel();
             using (JccRepository hc = new JccRepository())
             {
                 try
                 {
-                    result = hc.CabinetInfos?.Where(r => r.CabinetId == id).FirstOrDefault();
+                    result = hc.ChemicalParas?.Where(r => r.Id == id).FirstOrDefault();
                 }
                 catch (Exception ex)
                 {

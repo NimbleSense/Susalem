@@ -117,6 +117,16 @@
                     FontWeight="Bold"
                     Foreground="White"
                     Text="工匠柜教学项目" />
+                <TextBlock
+                    Grid.Column="1"
+                    Margin="5,0,10,0"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom"
+                    FontSize="15"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="{Binding Username}"
+                    />
 
 
             </Grid>

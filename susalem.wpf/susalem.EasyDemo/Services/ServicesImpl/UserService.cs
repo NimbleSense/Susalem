@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using susalem.EasyDemo.Services;
 
-namespace susalem.EasyDemo.Services
+namespace susalem.EasyDemo.Services.ServicesImpl
 {
-    public class UserService: IUserService
+    public class UserService : IUserService
     {
         public int AddUser(UserModel user)
         {
@@ -28,7 +29,7 @@ namespace susalem.EasyDemo.Services
 
                 }
             }
-            return nRet;    
+            return nRet;
         }
 
         public int DeleteUser(int userId)
@@ -74,12 +75,12 @@ namespace susalem.EasyDemo.Services
             {
                 try
                 {
-                     data = hc.Users!.Select(u => u).ToList();
-                    
+                    data = hc.Users!.Select(u => u).ToList();
+
                 }
                 catch (Exception ex)
                 {
-                    
+
                 }
             }
             return data;
@@ -119,6 +120,10 @@ namespace susalem.EasyDemo.Services
                         //    resultModel.Data!.RealName = hc.Roles!.Where(r => r.RoleId == roleId).FirstOrDefault()!.RoleName;
                         //    resultModel.Data!.Level = hc.Roles!.Where(r => r.RoleId == roleId).FirstOrDefault()!.Level;
                         //}
+                    }
+                    else
+                    {
+                        return null;
                     }
                 }
                 catch (Exception ex)

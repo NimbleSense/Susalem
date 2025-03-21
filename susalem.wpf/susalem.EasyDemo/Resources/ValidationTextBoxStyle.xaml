@@ -1,0 +1,97 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ValidationTextBoxStyle" TargetType="{x:Type TextBox}">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="2,1,1,1" />
+        <Setter Property="AllowDrop" Value="true" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="Validation.ErrorTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Border
+                            x:Name="adornerborder"
+                            VerticalAlignment="Top"
+                            BorderThickness="1">
+                            <Grid>
+                                <AdornedElementPlaceholder x:Name="adorner" Margin="-1" />
+                            </Grid>
+                        </Border>
+                        <Border
+                            x:Name="errorBorder"
+                            MaxHeight="30"
+                            Margin="8,0,0,0"
+                            Background="#FFdc000c"
+                            CornerRadius="0"
+                            IsHitTestVisible="False"
+                            Opacity="0">
+                            <TextBlock
+                                Margin="8,2,8,3"
+                                VerticalAlignment="Center"
+                                Foreground="White"
+                                Text="{Binding ElementName=adorner, Path=AdornedElement.(Validation.Errors).CurrentItem.ErrorContent}"
+                                TextWrapping="Wrap" />
+                        </Border>
+                    </StackPanel>
+
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <Binding ElementName="adorner" Path="AdornedElement.Tag" />
+                            </DataTrigger.Binding>
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard x:Name="fadeInStoryboard1">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="errorBorder"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="1"
+                                            Duration="00:00:00.15" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.Setters>
+                                <Setter TargetName="adornerborder" Property="BorderBrush" Value="#FFdc000c" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <Binding ElementName="adorner" Path="AdornedElement.IsKeyboardFocused" />
+                            </DataTrigger.Binding>
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard x:Name="fadeInStoryboard">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="errorBorder"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="1"
+                                            Duration="00:00:00.15" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <!--  是否保留异常直到数据正常:如果不需要则放开下列验证  -->
+                            <DataTrigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="fadeInStoryboard" />
+                                <BeginStoryboard x:Name="fadeOutStoryBoard">
+                                    <Storyboard>
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="errorBorder"
+                                            Storyboard.TargetProperty="Opacity"
+                                            To="0"
+                                            Duration="00:00:00" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                            <DataTrigger.Setters>
+                                <Setter TargetName="adornerborder" Property="BorderBrush" Value="#FFdc000c" />
+                            </DataTrigger.Setters>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style BasedOn="{StaticResource ValidationTextBoxStyle}" TargetType="{x:Type TextBox}" />
+</ResourceDictionary>

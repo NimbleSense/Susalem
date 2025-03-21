@@ -1,5 +1,4 @@
 ﻿using susalem.EasyDemo.Entities;
-using susalem.EasyDemo.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -12,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using susalem.EasyDemo.Services;
+using System.Diagnostics;
 
 namespace susalem.EasyDemo.ViewModels
 {
@@ -45,7 +46,9 @@ namespace susalem.EasyDemo.ViewModels
             get { return _clock; }
             set { _clock = value; RaisePropertyChanged(); }
         }
+        
 
+        //启动一个线程刷新右上角当前时间
         private void RefreshDateTime()
         {
             Task.Run(async () =>
@@ -56,6 +59,7 @@ namespace susalem.EasyDemo.ViewModels
                     await Task.Delay(1000);
                     if (Application.Current != null)
                     {
+                        //委托刷新ui
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             Clock = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -66,6 +70,7 @@ namespace susalem.EasyDemo.ViewModels
             }, _cts.Token);
         }
 
+        //定时刷新回温工匠品列表
         private void RefreshList()
         {
 
@@ -79,7 +84,7 @@ namespace susalem.EasyDemo.ViewModels
                         var group = lstInfoModels.GroupBy(x => x.PNCode);
                         if (group == null || group.Count() == 0)
                             continue;
-                        //TODO 线程调用报错的地方
+                        //TODO 线程调用报错的地方 
                         Application.Current.Dispatcher.Invoke(() => { DataList.Clear(); });
 
                         List<Cabinfo> cabinfoList = new List<Cabinfo>();
@@ -108,13 +113,24 @@ namespace susalem.EasyDemo.ViewModels
 
                         foreach (var item in lstInfoModels)
                         {
-                            if (item.TemperatureEndTime >= DateTime.Now && OverAllContext.IsWarn)
+                            if (item.IsNull)
                             {
+                                continue;
+                            }
+                            
+                            //&& OverAllContext.IsWarn 结束回温
+                            if (item.TemperatureEndTime <= DateTime.Now )
+                            {
+                                Application.Current.Dispatcher.Invoke(() => 
+                                {
+                                    _dialogService.ShowDialog("WarningView", new DialogParameters() { { "Text", $"机台码:{item.MachineId}结束回温!" } }, null);
+                                });
+                                
                                 // 检测是否回温完成
-                                _dialogService.ShowDialog("WarningView", new DialogParameters() { { "Text", $"{item.CabinetId}结束回温!" } }, null);
+                               
                             }
 
-                            // 检测是否回温完成
+                            // 检测是否过期
                             if (item.ExpirationDate <= DateTime.Now.AddDays(2) && OverAllContext.IsError)
                             {
                                 DialogParameters keyValuePairs = new DialogParameters();
