@@ -161,9 +161,12 @@ namespace susalem.EasyDemo
         {
             get => new DelegateCommand(() =>
             {
-                NavigationParameters keyValuePairs = new NavigationParameters();
+                //NavigationParameters keyValuePairs = new NavigationParameters();
                 //keyValuePairs.Add("Menu", menuItem);
-                _regionManager.Regions["MainRegion"].RequestNavigate("ParameterSettingView", keyValuePairs);
+                // 导航时传递参数
+                var parameters = new NavigationParameters { { "ClearValidation", true } };
+                _regionManager.RequestNavigate("MainRegion", "ParameterSettingView", parameters);
+                //_regionManager.Regions["MainRegion"].RequestNavigate("ParameterSettingView", keyValuePairs);
             });
         }
 
@@ -234,7 +237,9 @@ namespace susalem.EasyDemo
                 //e.Cancel = true; // 取消导航
                 // 可以在此处添加提示逻辑
             }
+
         }
+
 
         private bool ShouldCancelNavigation(Uri uri)
         {
