@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace susalem.EasyDemo.Views
 {
     /// <summary>
@@ -24,11 +25,7 @@ namespace susalem.EasyDemo.Views
         public ParameterSettingView()
         {
             InitializeComponent();
-            
-            Debug.WriteLine("页面已初始化"); // 多次切换时观察是否重复输出
         }
-        // YourPage.xaml.cs
-
     }
 
 }

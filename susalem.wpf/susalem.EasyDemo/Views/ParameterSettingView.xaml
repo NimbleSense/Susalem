@@ -156,7 +156,6 @@
             HorizontalAlignment="Center"
             Command="{Binding AddCommand}"
             Content="添加"
-            IsEnabled="{Binding ChemicalPara.IsValidated}"
             FontSize="22" />
     </Grid>
 </UserControl>
