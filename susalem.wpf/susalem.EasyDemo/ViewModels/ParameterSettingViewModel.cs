@@ -1,6 +1,5 @@
 ﻿using HandyControl.Collections;
 using susalem.EasyDemo.Entities;
-using susalem.EasyDemo.Services;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Services.Dialogs;
@@ -13,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
+using susalem.EasyDemo.Services;
+using System.Diagnostics;
 
 namespace susalem.EasyDemo.ViewModels
 {
@@ -27,54 +28,63 @@ namespace susalem.EasyDemo.ViewModels
             _chamParaService = chamParaService;
             _dialogService = dialogService;
             _cabinetInfoService = cabinetInfoService;
+            //创建chemicalPara对象
+            ChemicalPara = new ChemicalParaModel();
         }
 
         #region Property
 
-        private string? name;
+        private ChemicalParaModel? chemicalPara;
 
-        public string? Name
+        public ChemicalParaModel? ChemicalPara
         {
-            get { return name; }
-            set { name = value; RaisePropertyChanged(); }
+            get { return chemicalPara; }
+            set { chemicalPara = value; RaisePropertyChanged(); }
         }
+        //private string? name;
 
-        private string? pNCode;
+        //public string? Name
+        //{
+        //    get { return name; }
+        //    set { name = value; RaisePropertyChanged(); }
+        //}
 
-        public string? PNCode
-        {
-            get { return pNCode; }
-            set { pNCode = value; RaisePropertyChanged(); }
-        }
+        //private string? pNCode;
 
-        private string? serialNum;
+        //public string? PNCode
+        //{
+        //    get { return pNCode; }
+        //    set { pNCode = value; RaisePropertyChanged(); }
+        //}
 
-        public string? SerialNum
-        {
-            get { return serialNum; }
-            set { serialNum = value; RaisePropertyChanged(); }
-        }
+        //private string? serialNum;
+
+        //public string? SerialNum
+        //{
+        //    get { return serialNum; }
+        //    set { serialNum = value; RaisePropertyChanged(); }
+        //}
 
         /// <summary>
         /// 机台码
         /// </summary>
-        private string? machineId;
+        //private string? machineId;
 
-        public string? MachineId
-        {
-            get { return machineId; }
-            set { machineId = value; RaisePropertyChanged(); }
-        }
+        //public string? MachineId
+        //{
+        //    get { return machineId; }
+        //    set { machineId = value; RaisePropertyChanged(); }
+        //}
 
         /// <summary>
         /// 机柜号
         /// </summary>
-        private string? cabinetId;
-        public string? CabinetId
-        {
-            get { return cabinetId; }
-            set { cabinetId = value; RaisePropertyChanged(); }
-        }
+        //private string? cabinetId;
+        //public string? CabinetId
+        //{
+        //    get { return cabinetId; }
+        //    set { cabinetId = value; RaisePropertyChanged(); }
+        //}
 
         private ObservableCollection<string> cabinets = new ObservableCollection<string>();
         public ObservableCollection<string> Cabinets
@@ -84,39 +94,52 @@ namespace susalem.EasyDemo.ViewModels
         }
 
 
-        private string? reheatingTime;
+        //private double? reheatingTime;
 
-        public string? ReheatingTime
-        {
-            get { return reheatingTime; }
-            set { reheatingTime = value; RaisePropertyChanged(); }
-        }
+        //public double? ReheatingTime
+        //{
+        //    get { return reheatingTime; }
+        //    set { reheatingTime = value; RaisePropertyChanged(); }
+        //}
 
-        private string? expirationDate;
+        //private double? expirationDate;
 
-        public string? ExpirationDate
-        {
-            get { return expirationDate; }
-            set { expirationDate = value; RaisePropertyChanged(); }
-        }
+        //public double? ExpirationDate
+        //{
+        //    get { return expirationDate; }
+        //    set { expirationDate = value; RaisePropertyChanged(); }
+        //}
 
+
+        //public ChemicalParaModel? ChemicalPara
+        //{
+        //    get { return chemicalPara; }
+        //    set { SetProperty(ref chemicalPara, value); RaisePropertyChanged(); }
+        //}
         #endregion
 
         public ICommand AddCommand
         {
             get => new DelegateCommand(async () =>
             {
-                ChemicalParaModel chemicalParaModel = new ChemicalParaModel();
-                chemicalParaModel.IsUse = false;
-                chemicalParaModel.CabinetId = CabinetId;
-                chemicalParaModel.Name = Name;
-                chemicalParaModel.PNCode = PNCode;
-                chemicalParaModel.SerialNum = SerialNum;
-                chemicalParaModel.MachineId = MachineId;
-                chemicalParaModel.ReheatingTime = double.Parse(ReheatingTime);
-                chemicalParaModel.ExpirationDate = double.Parse(ExpirationDate);
-                int ret = _chamParaService.AddPara(chemicalParaModel);
-
+                //ChemicalParaModel chemicalParaModel = new ChemicalParaModel();
+                //chemicalParaModel.IsUse = false;
+                //chemicalParaModel.CabinetId = CabinetId;
+                //chemicalParaModel.Name = Name;
+                //chemicalParaModel.PNCode = PNCode;
+                //chemicalParaModel.SerialNum = SerialNum;
+                //chemicalParaModel.MachineId = MachineId;
+                //chemicalParaModel.ReheatingTime = double.Parse(ReheatingTime);
+                //chemicalParaModel.ExpirationDate = double.Parse(ExpirationDate);
+                ChemicalPara.IsUse = false;
+                if (!ChemicalPara.IsValidated)
+                {
+                    ChemicalPara.IsFormValid = true;
+                    _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请检查输入项" } }, null);
+                    return;
+                }
+                int ret = _chamParaService.AddPara(ChemicalPara);
+                
                 await RefreshCabinets();
 
                 if (ret >= 0)
@@ -162,7 +185,7 @@ namespace susalem.EasyDemo.ViewModels
         }
 
         /// <summary>
-        /// 刷新选择柜号下拉框
+        /// 异步获取
         /// </summary>
         /// <returns></returns>
         private async Task RefreshCabinets()

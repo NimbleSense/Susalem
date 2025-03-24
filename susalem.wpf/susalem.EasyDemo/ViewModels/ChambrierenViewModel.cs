@@ -1,5 +1,4 @@
 ﻿using susalem.EasyDemo.Entities;
-using susalem.EasyDemo.Services;
 using HslCommunication;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -13,6 +12,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Prism.Regions;
+using susalem.EasyDemo.Services;
 
 namespace susalem.EasyDemo.ViewModels
 {
@@ -62,6 +63,11 @@ namespace susalem.EasyDemo.ViewModels
                 try
                 {
                     List<ChemicalParaModel> chemicalParaModels = _chamParaService.FindAllParas();
+                    if (string.IsNullOrEmpty(PNCode) || string.IsNullOrEmpty(SerialNum))
+                    {
+                        _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请输入工匠品料号和工匠品编号!" } }, null);
+                        return;
+                    }
                     if (chemicalParaModels == null || chemicalParaModels.Count == 0)
                     {
                         _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "请检查该工匠品有无设置参数!" } }, null);
@@ -87,6 +93,7 @@ namespace susalem.EasyDemo.ViewModels
                         _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "该柜子正在使用中!" } }, null);
                         return;
                     }
+                    _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "开始回温" } }, null);
 
                     // 门锁有三秒保持信号，在开完锁之后必须立马关锁
                     OverAllContext.ModbusTcpLock.WriteAsync(infoModel.LockAddress, true);
@@ -103,7 +110,7 @@ namespace susalem.EasyDemo.ViewModels
                     infoModel.TemperatureStartTime = DateTime.Now;
                     infoModel.TemperatureEndTime = DateTime.Now.AddHours(ChemicalParaModel.ReheatingTime);
                     infoModel.ExpirationDate = DateTime.Now.AddHours(ChemicalParaModel.ReheatingTime).AddDays(ChemicalParaModel.ExpirationDate);
-
+                    
 
                     _cabinetInfoService.EditCabinetInfo(infoModel);
 
@@ -114,7 +121,13 @@ namespace susalem.EasyDemo.ViewModels
                     historyModel.PNCode = ChemicalParaModel.PNCode;
                     historyModel.SerialNum = ChemicalParaModel.SerialNum;
                     historyModel.MachineId = ChemicalParaModel.MachineId;
+                    historyModel.Message = "开柜回温"; 
                     historyModel.Name = ChemicalParaModel.Name;
+                    historyModel.Message = "开始回温";
+                    if (OverAllContext.User != null)
+                    {
+                        historyModel.Operater = OverAllContext.User.UserName;
+                    }
                     historyModel.OpenCabinetTime = DateTime.Now;
                     _historyService.AddHistory(historyModel);
 
@@ -139,6 +152,7 @@ namespace susalem.EasyDemo.ViewModels
                 }
             });
         }
+
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using susalem.EasyDemo.Entities;
 using susalem.EasyDemo.Models;
-using susalem.EasyDemo.Services;
 using HslCommunication.Core.Net;
 using HslCommunication.Secs.Types;
 using Microsoft.Extensions.Logging;
@@ -17,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using susalem.EasyDemo.Services;
 
 namespace susalem.EasyDemo.ViewModels
 {
@@ -161,6 +161,7 @@ namespace susalem.EasyDemo.ViewModels
                     if (resultModel!=null)
                     {
                         OverAllContext.User = resultModel!;
+                        MainWindowViewModel.Username= "当前登录账户："+OverAllContext.User.UserName;
                         Application.Current.Dispatcher.Invoke(() =>
                         {
                             _dialogService.ShowDialog("MessageView", new DialogParameters() { { "Content", "登录成功!" } }, null);
