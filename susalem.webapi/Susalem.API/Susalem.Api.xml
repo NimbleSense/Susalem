@@ -1,0 +1,835 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Susalem.Api</name>
+    </assembly>
+    <members>
+        <member name="T:Susalem.Api.Controllers.ActionController">
+            <summary>
+            Action management
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ActionController.RestartService">
+            <summary>
+            Restart service
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Controllers.AlarmController">
+            <summary>
+            Alarm management
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlarmController.GetUnConfirmedWarnings">
+            <summary>
+            Get all unconfirmed warnings and alarms
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlarmController.GetUnConfirmedCount">
+            <summary>
+            Get all unconfirmed warnings and alarms count
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlarmController.ConfirmAlarm(System.Int32,Susalem.Core.Application.DTOs.ConfirmAlarmDTO)">
+            <summary>
+            Confirm specific alarm
+            </summary>
+            <param name="alarmId">need to confirm Alarm ID</param>
+            <param name="confirmAlarm">confirm content</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlarmController.ConfirmAlarm(Susalem.Core.Application.DTOs.ConfirmAlarmDTO)">
+            <summary>
+            Confirm all alarm
+            </summary>
+            <param name="confirmAlarm">confirm content</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlarmController.GetAllAlarms(Susalem.Core.Application.ReadModels.Alarm.AlarmParameters)">
+            <summary>
+            Get all confirmed alarms by search condition
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlarmController.GetReport(Susalem.Core.Application.Enumerations.AlarmLevelEnum,System.DateTime,System.DateTime)">
+            <summary>
+            Get pdf report
+            </summary>
+            <param name="alarmLevel"></param>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlarmController.GetAlarmSettings">
+            <summary>
+            Get all area and position alarm setting thresholds
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlarmController.UpdateAlarmThreshold(System.Collections.Generic.IEnumerable{Susalem.Core.Application.DTOs.ThresholdRequestDTO})">
+            <summary>
+            Update alarm and warning settings
+            </summary>
+            <param name="thresholdRequests">threshold settings</param>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Controllers.AlerterController">
+            <summary>
+            Alerter management.
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlerterController.Get">
+            <summary>
+            Get all alerter
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlerterController.GetMonitorAlerter">
+            <summary>
+            Get all alerter used for monitor
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlerterController.Put(System.Int32,Susalem.Core.Application.DTOs.AlerterRequestDTO)">
+            <summary>
+            Update alerter
+            </summary>
+            <param name="id">alerter id</param>
+            <param name="requestDto">alerter request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AlerterController.Delete(System.Int32)">
+            <summary>
+            Delete alerter
+            </summary>
+            <param name="id">alerter id</param>
+        </member>
+        <member name="T:Susalem.Api.Controllers.AreaController">
+            <summary>
+            Related with area and position management
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AreaController.#ctor(Microsoft.Extensions.Logging.ILogger{Susalem.Api.Controllers.AreaController},Susalem.Core.Application.Interfaces.Services.IApplicationPositionService)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AreaController.GetAreas">
+            <summary>
+            Get All Areas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AreaController.GetArea(System.Int32)">
+            <summary>
+            Get area by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AreaController.Post(Susalem.Core.Application.DTOs.AreaDTO)">
+            <summary>
+            Create a new area
+            </summary>
+            <param name="areaDto">area</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AreaController.Put(System.Int32,Susalem.Core.Application.DTOs.AreaDTO)">
+            <summary>
+            Update a area
+            </summary>
+            <param name="id"></param>
+            <param name="areaDto"></param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AreaController.Delete(System.Int32)">
+            <summary>
+            Delete area
+            </summary>
+            <param name="id">Area id</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AreaController.GetPositions(System.Int32)">
+            <summary>
+            Get all position by area id
+            </summary>
+            <param name="areaId">area id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AreaController.GetAllMonitorAreas">
+            <summary>
+            Get all monitor areas include position and functions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Controllers.AuditController">
+            <summary>
+            Audit trail records
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AuditController.Get(Susalem.Core.Application.ReadModels.Audit.AuditParameters)">
+            <summary>
+            Get audit records
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AuditController.GetReport(System.DateTime,System.DateTime)">
+            <summary>
+            Get audit records
+            </summary>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AuditController.Post(System.String,System.String)">
+            <summary>
+            Create an audit record
+            </summary>
+            <param name="eventType">audit event type</param>
+            <param name="description">audit description</param>
+        </member>
+        <member name="T:Susalem.Api.Controllers.AuthController">
+            <summary>
+            User login and logout.
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AuthController.Auth(Susalem.Core.Application.DTOs.LoginRequestDTO)">
+            <summary>
+            login with name and password and get jwt token.
+            </summary>
+            <param name="loginViewModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.AuthController.Logout">
+            <summary>
+            User logout
+            </summary>
+        </member>
+        <member name="T:Susalem.Api.Controllers.CentralPumpController">
+            <summary>
+            Central pump related management
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.CentralPumpController.Get">
+            <summary>
+            Get all central pumps
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.CentralPumpController.Put(System.Int32,Susalem.Core.Application.DTOs.CentralPumpRequestDTO)">
+            <summary>
+            Update central pump
+            </summary>
+            <param name="id">central pump id</param>
+            <param name="requestDto">central pump request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.CentralPumpController.Delete(System.Int32)">
+            <summary>
+            Delete central pump
+            </summary>
+            <param name="id">central pump id</param>
+        </member>
+        <member name="T:Susalem.Api.Controllers.ConfigController">
+            <summary>
+            Related with system configuration settings.
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.#ctor(Susalem.Core.Application.Interfaces.IServiceBus,Susalem.Core.Application.Interfaces.Services.IApplicationConfigurationService,Susalem.Core.Application.Interfaces.Services.IMonitorService,Susalem.Core.Application.Interfaces.Services.ILicenseService)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="serviceBus"></param>
+            <param name="configurationService"></param>
+            <param name="monitorService"></param>
+            <param name="licenseService"></param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.GetSystem">
+            <summary>
+            Get system application config items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.UpdateSystem(Susalem.Core.Application.DTOs.SystemConfigurationDTO)">
+            <summary>
+            Update system application config items.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.GetDbBackup">
+            <summary>
+            Get database backup configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.UpdateDbBackup(Susalem.Core.Application.DTOs.DbConfigurationDTO)">
+            <summary>
+            Update database backup configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.GetSerialPorts">
+            <summary>
+            Get usable serial ports from computer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.GetSerialPortSetting">
+            <summary>
+            Get serial port configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.UpdateSerialPortSetting(Susalem.Core.Application.DTOs.SerialPortConfigurationDTO)">
+            <summary>
+            Update serial port configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.Get(System.String)">
+            <summary>
+            Get application config item detail.
+            Id:CustomerName (used to set customer company name)
+            Id:DefaultPassword (used to set default password for new created user)
+            </summary>
+            <param name="id">Config item id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.Put(System.String,Susalem.Core.Application.DTOs.ApplicationConfigurationDTO)">
+            <summary>
+            Update application config item.
+            </summary>
+            <param name="id">Config item key</param>
+            <param name="applicationConfigurationDto"></param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.GetLicenseStatus">
+            <summary>
+            Get license status
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.GetLicenseSetting">
+            <summary>
+            Get license status
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConfigController.UpdateLicenseSetting(Susalem.Core.Application.DTOs.LicenseConfigurationDTO)">
+            <summary>
+            Update serial port configuration.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Controllers.ConnectionController">
+            <summary>
+            Serial port connection controller
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConnectionController.GetConnectedStatus">
+            <summary>
+            Current is connected.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.ConnectionController.GetAvailableCOM">
+            <summary>
+            Get available coms
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Controllers.DeviceController">
+            <summary>
+            Related with device and device types management.
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.GetDeviceTypes">
+            <summary>
+            Get all device types.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.Get">
+            <summary>
+            Get all devices.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.GetDevicesByType(System.Int32)">
+            <summary>
+            Get all devices in device type.
+            </summary>
+            <param name="deviceTypeId">Device type id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.GetDevice(System.Int32)">
+            <summary>
+            Get device.
+            </summary>
+            <param name="id">device id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.Post(Susalem.Core.Application.DTOs.DeviceRequestDTO)">
+            <summary>
+            Create a new device
+            </summary>
+            <param name="deviceRequestDto">device request</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.Put(System.Int32,Susalem.Core.Application.DTOs.DeviceRequestDTO)">
+            <summary>
+            Update a device
+            </summary>
+            <param name="id">device id</param>
+            <param name="deviceRequestDto">device request</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.Delete(System.Int32)">
+            <summary>
+            Delete device.
+            </summary>
+            <param name="id">device id</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.UpdateDeviceThresholds(System.Int32,System.Collections.Generic.List{Susalem.Core.Application.DTOs.ThresholdRequestDTO})">
+            <summary>
+            Update the specified device function alarm and warning thresholds
+            </summary>
+            <param name="deviceId">Device ID</param>
+            <param name="thresholdRequestDtos">functions threshold requests</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.UpdateThresholds(System.Collections.Generic.List{Susalem.Core.Application.DTOs.DeviceThresholdRequestDTO})">
+            <summary>
+            Set the warning and alarm thresholds for devices.
+            </summary>
+            <param name="requestDtos">threshold requests</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.GetAlerter(System.Int32)">
+            <summary>
+            Get device alerter.
+            </summary>
+            <param name="deviceId">Device ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.GetCentralPump(System.Int32)">
+            <summary>
+            Get device central pump.
+            </summary>
+            <param name="deviceId">Device ID</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.CreateCentralPump(System.Int32,Susalem.Core.Application.DTOs.CentralPumpRequestDTO)">
+            <summary>
+            Create central pump
+            </summary>
+            <param name="deviceId">Device ID</param>
+            <param name="requestDto">Central pump request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.CreateAlerter(System.Int32,Susalem.Core.Application.DTOs.AlerterRequestDTO)">
+            <summary>
+            Create alerter
+            </summary>
+            <param name="deviceId">Device ID</param>
+            <param name="requestDto">alerter request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.DeviceController.CommandDevice(System.Int32,Susalem.Api.ViewModels.Command)">
+            <summary>
+            Send command to device
+            </summary>
+            <param name="deviceId">device id</param>
+            <param name="command">command</param>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Controllers.PositionController">
+            <summary>
+            Related with position management.
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.GetPositionFunctions">
+            <summary>
+            Get position functions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.Get">
+            <summary>
+            Get all positions
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.GetPosition(System.Int32)">
+            <summary>
+            Get specific position
+            </summary>
+            <param name="positionId">position Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.Post(Susalem.Core.Application.DTOs.PositionRequestDTO)">
+            <summary>
+            Create a position
+            </summary>
+            <param name="requestDto">Position request</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.Put(System.Int32,Susalem.Core.Application.DTOs.PositionRequestDTO)">
+            <summary>
+            Update a position
+            </summary>
+            <param name="positionId">position id</param>
+            <param name="requestDto">Position request</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.Delete(System.Int32)">
+            <summary>
+            Delete position.
+            </summary>
+            <param name="id">position id</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.UpdatePositionFunction(System.Int32,System.Collections.Generic.IList{Susalem.Core.Application.DTOs.PositionFunctionProperty})">
+            <summary>
+            Update position functions
+            </summary>
+            <param name="positionId">position id</param>
+            <param name="positionFunctions">position functions and related devices</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.DeletePositionFunction(System.Int32,Susalem.Core.Application.Enumerations.PositionFunctionEnum)">
+            <summary>
+            Delete position function
+            </summary>
+            <param name="positionId">position id</param>
+            <param name="positionFunction">position function name</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.PositionController.GetThresholds(System.Int32)">
+            <summary>
+            Get all position functions alarm and warning
+            </summary>
+            <param name="positionId">Position ID</param>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Controllers.RecordController">
+            <summary>
+            Record management
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.RecordController.GetRecords(Susalem.Core.Application.ReadModels.Record.RecordParameters)">
+            <summary>
+            Get all records by page parameter
+            </summary>
+            <param name="parameters">Page parameter</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.RecordController.GetReport(System.Int32,Susalem.Core.Application.Enumerations.PositionFunctionEnum,System.DateTime,System.DateTime)">
+            <summary>
+            Get pdf report
+            </summary>
+            <param name="positionId"></param>
+            <param name="positionFunction"></param>
+            <param name="startTime"></param>
+            <param name="endTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.RecordController.GetRecords(Susalem.Core.Application.ReadModels.Record.RecordChartRequestDTO)">
+            <summary>
+            Get records for chart
+            </summary>
+            <param name="recordRequest"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Controllers.RoomController">
+            <summary>
+            Room 相关功能
+            </summary>
+        </member>
+        <member name="T:Susalem.Api.Controllers.UserController">
+            <summary>
+            Related with user management.
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.GetUsers">
+            <summary>
+            Get all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.GetUser(System.String)">
+            <summary>
+            Get user by name
+            </summary>
+            <param name="username">user name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.GetRole(System.String)">
+            <summary>
+            Get user roles
+            </summary>
+            <param name="username">user name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.GetRoles">
+            <summary>
+            Get user settable roles
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.Post(Susalem.Core.Application.DTOs.UserRequestDTO)">
+            <summary>
+            Create new user
+            </summary>
+            <param name="requestDTO">User request DTO</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.Put(System.String,Susalem.Core.Application.DTOs.UserRequestDTO)">
+            <summary>
+            Update user detail
+            </summary>
+            <param name="userId">user id</param>
+            <param name="requestDTO">user request DTO</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.Activate(System.String)">
+            <summary>
+            Activate user
+            </summary>
+            <param name="username">user name</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.DeActivate(System.String)">
+            <summary>
+            DeActivate user
+            </summary>
+            <param name="username">User name</param>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.Delete(System.String)">
+            <summary>
+            Delete user
+            </summary>
+            <param name="username">user name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.UpdateRoles(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            Update user roles
+            </summary>
+            <param name="username"></param>
+            <param name="roles"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.ResetPassword(System.String)">
+            <summary>
+            Reset password
+            </summary>
+            <param name="username">user name</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.Controllers.UserController.ChangePassword(System.String,Susalem.Core.Application.DTOs.NewPasswordDTO)">
+            <summary>
+            Change password
+            </summary>
+            <param name="username">user name</param>
+            <param name="passwordDto">password</param>
+            <returns></returns>
+        </member>
+        <member name="T:Susalem.Api.Handlers.LicenseExpiredEventHandler">
+            <summary>
+            License is expired event handler
+            </summary>
+        </member>
+        <member name="T:Susalem.Api.Interfaces.IReportService">
+            <summary>
+            Generate record report
+            </summary>
+        </member>
+        <member name="T:Susalem.Api.MonitorHub">
+            <summary>
+            Receive message from stream, and send to front end.
+            </summary>
+        </member>
+        <member name="M:Susalem.Api.MonitorHub.StartMonitor(System.Collections.Generic.ICollection{System.Int32})">
+            <summary>
+            开启监控
+            </summary>
+            <param name="positionIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.MonitorHub.StopMonitor">
+            <summary>
+            停止监控
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.MonitorHub.ConfirmAlarm(System.Collections.Generic.ICollection{System.Int32},System.String)">
+            <summary>
+            确认告警
+            </summary>
+            <param name="alarmIds"></param>
+            <param name="confirmContent"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.MonitorHub.RegisterPositions(System.Collections.Generic.ICollection{System.Int32})">
+            <summary>
+            注册监控点位
+            </summary>
+            <param name="positionIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.MonitorHub.UnRegisterPositions(System.Collections.Generic.ICollection{System.Int32})">
+            <summary>
+            取消监控点位
+            </summary>
+            <param name="positionIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.MonitorHub.SetAlerterBuzzing(System.Boolean)">
+            <summary>
+            设置所有报警器是否允许蜂鸣
+            </summary>
+            <param name="isEnableBuzzing">buzzing status</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.MonitorHub.AdjustAlerterStatus(System.Boolean)">
+            <summary>
+            调整报警器状态，是否启用
+            </summary>
+            <param name="isEnableAlerter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.LicenseExpired">
+            <summary>
+            Software is expired.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.ReportAlarm(Susalem.Core.Application.ReadModels.Alarm.AlarmQueryModel)">
+            <summary>
+            Report Alarm
+            </summary>
+            <param name="alarmQueryModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.UpdateData(System.Int32,System.String,System.Collections.Generic.ICollection{Susalem.Core.Application.ReadModels.Record.RecordContent})">
+            <summary>
+            Update position changed data
+            </summary>
+            <param name="positionId">Position ID</param>
+            <param name="function">Position function</param>
+            <param name="recordContents">Changed record contents</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.UpdatePositionStatus(Susalem.Core.Application.DTOs.PositionMonitoringStatus)">
+            <summary>
+            Update position status
+            </summary>
+            <param name="status">position status</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.UpdateMonitorStatus(System.Boolean)">
+            <summary>
+            Update monitor status
+            </summary>
+            <param name="isMonitoring">Is monitoring</param>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.UpdateAlerterBuzzing(System.Boolean)">
+            <summary>
+            更新所有报警器蜂鸣声
+            </summary>
+            <param name="isEnableBuzzing"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.UpdateAlerterStatus(System.Boolean)">
+            <summary>
+            调整报警器状态，是否启用
+            </summary>
+            <param name="isEnableAlerter"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.UnRegisterMonitorPositions(System.Collections.Generic.ICollection{System.Int32})">
+            <summary>
+            取消监控的点位
+            </summary>
+            <param name="positionIds">点位列表</param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.RegisterMonitorPositions(System.Collections.Generic.ICollection{System.Int32})">
+            <summary>
+            准备监控点位
+            </summary>
+            <param name="positionIds"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.UpdateCentralPumpStatus(Susalem.Core.Application.DTOs.DeviceStatus)">
+            <summary>
+            更新中央泵状态
+            </summary>
+            <param name="deviceStatus"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Susalem.Api.IMessageClient.UpdateOfflineDevices(System.Collections.Generic.ICollection{System.Int32},System.Boolean)">
+            <summary>
+            更新设备状态
+            </summary>
+            <param name="deviceIds"></param>
+            <param name="status"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.Issuer">
+            <summary>
+            "iss" (Issuer) Claim - The "iss" (issuer) claim identifies the principal that issued the JWT.
+            </summary>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.Subject">
+            <summary>
+            "sub" (Subject) Claim - The "sub" (subject) claim identifies the principal that is the subject of the JWT.
+            </summary>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.Audience">
+            <summary>
+            "aud" (Audience) Claim - The "aud" (audience) claim identifies the recipients that the JWT is intended for.
+            </summary>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.Expiration">
+            <summary>
+            "exp" (Expiration Time) Claim - The "exp" (expiration time) claim identifies the expiration time on or after which the JWT MUST NOT be accepted for processing.
+            </summary>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.NotBefore">
+            <summary>
+             "nbf" (Not Before) Claim - The "nbf" (not before) claim identifies the time before which the JWT MUST NOT be accepted for processing.
+            </summary>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.IssuedAt">
+            <summary>
+            "iat" (Issued At) Claim - The "iat" (issued at) claim identifies the time at which the JWT was issued.
+            </summary>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.ValidFor">
+            <summary>
+            Set the timespan the token will be valid for (default is 120min).
+            </summary>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.JtiGenerator">
+            <summary>
+            "jti" (JWT ID) Claim (default ID is a GUID)
+            </summary>
+        </member>
+        <member name="P:Susalem.Api.Options.JwtIssuerOptions.SigningCredentials">
+            <summary>
+            The signing key to use when generating tokens.
+            </summary>
+        </member>
+        <member name="T:Susalem.Api.Services.TemplateGenerator">
+            <summary>
+            Generate html to string 
+            </summary>
+        </member>
+        <member name="T:Susalem.Api.Utilities.Scheduler.DbBackupJob">
+            <summary>
+            Db backup job
+            </summary>
+        </member>
+        <member name="T:Susalem.Api.ViewModels.Users.CreateUserViewModel">
+            <summary>
+            Create a new user
+            </summary>
+        </member>
+        <member name="T:Susalem.Api.ViewModels.Users.LoginViewModel">
+            <summary>
+            User login
+            </summary>
+        </member>
+    </members>
+</doc>

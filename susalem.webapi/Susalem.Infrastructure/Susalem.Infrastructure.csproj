@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Identity.Core" Version="7.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="7.0.4" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+		<PackageReference Include="System.Linq.Expressions" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Susalem.Infrastructure.Consumer\Susalem.Infrastructure.Consumer.csproj" />
+	  <ProjectReference Include="..\Susalem.Infrastructure.Device\Susalem.Infrastructure.Device.csproj" />
+	  <ProjectReference Include="..\Susalem.Notification.Mail\Susalem.Notification.Mail.csproj" />
+	  <ProjectReference Include="..\Susalem.Notification.Webhook\Susalem.Notification.Webhook.csproj" />
+	  <ProjectReference Include="..\Susalem.Persistence.Npgsql\Susalem.Persistence.Npgsql.csproj" />
+	  <ProjectReference Include="..\Susalem.Persistence\Susalem.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>

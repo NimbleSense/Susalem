@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AirborneMicrobe" xml:space="preserve">
+    <value>Airborne Microbe</value>
+  </data>
+  <data name="Alarm" xml:space="preserve">
+    <value>Alarm</value>
+  </data>
+  <data name="AlarmHistory" xml:space="preserve">
+    <value>Alarm history query</value>
+  </data>
+  <data name="Audit" xml:space="preserve">
+    <value>Audit</value>
+  </data>
+  <data name="AuditHistory" xml:space="preserve">
+    <value>Audit record query</value>
+  </data>
+  <data name="AuditReport" xml:space="preserve">
+    <value>Audit records exported</value>
+  </data>
+  <data name="ChangePwd" xml:space="preserve">
+    <value>{0}  changed password</value>
+  </data>
+  <data name="ChartSearch" xml:space="preserve">
+    <value>Data curve record query</value>
+  </data>
+  <data name="CloudFailed" xml:space="preserve">
+    <value>connection lost</value>
+  </data>
+  <data name="ConfirmAlarm" xml:space="preserve">
+    <value>Confirm Alarm</value>
+  </data>
+  <data name="ConfirmMultiAlarm" xml:space="preserve">
+    <value>Alarms confirmed</value>
+  </data>
+  <data name="ConfirmSingleAlarm" xml:space="preserve">
+    <value>Single alarm confirmed</value>
+  </data>
+  <data name="CreateRole" xml:space="preserve">
+    <value>Create Role</value>
+  </data>
+  <data name="CreateRoleDetail" xml:space="preserve">
+    <value> {0} create succeed</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>Create User</value>
+  </data>
+  <data name="CreateUserDetail" xml:space="preserve">
+    <value> {0} create succeed</value>
+  </data>
+  <data name="DeleteAlarm" xml:space="preserve">
+    <value>Delete Alarms</value>
+  </data>
+  <data name="DeleteAudit" xml:space="preserve">
+    <value>Delete Audits</value>
+  </data>
+  <data name="DeleteRecord" xml:space="preserve">
+    <value>Delete Records</value>
+  </data>
+  <data name="DeleteRole" xml:space="preserve">
+    <value>Delete Role</value>
+  </data>
+  <data name="DeleteRoleDetail" xml:space="preserve">
+    <value>{0} delete succeed</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>Delete User</value>
+  </data>
+  <data name="DeleteUserDetail" xml:space="preserve">
+    <value>{0} delete succeed</value>
+  </data>
+  <data name="Desc" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DewPoint" xml:space="preserve">
+    <value>Dew Point</value>
+  </data>
+  <data name="DisableBuzzing" xml:space="preserve">
+    <value>Beep is disable</value>
+  </data>
+  <data name="DisableLighting" xml:space="preserve">
+    <value>Lighting is disable</value>
+  </data>
+  <data name="EnableBuzzing" xml:space="preserve">
+    <value>Beep is enable</value>
+  </data>
+  <data name="EnableLighting" xml:space="preserve">
+    <value>Lighting is enable</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>Environment</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="ExitMonitorMode" xml:space="preserve">
+    <value>{0} exit monitor mode</value>
+  </data>
+  <data name="ExitMonitorMode2" xml:space="preserve">
+    <value>All locations exit monitor mode</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="ExportAlarm" xml:space="preserve">
+    <value>Export alarm</value>
+  </data>
+  <data name="ExportAlarmSuccess" xml:space="preserve">
+    <value>Alarm records exported</value>
+  </data>
+  <data name="Flow" xml:space="preserve">
+    <value>Flow</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="Humiture" xml:space="preserve">
+    <value>Humiture</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>Enter System</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="LogoutSuccess" xml:space="preserve">
+    <value>Logout System</value>
+  </data>
+  <data name="Micron01" xml:space="preserve">
+    <value>0.1μm</value>
+  </data>
+  <data name="Micron02" xml:space="preserve">
+    <value>0.2μm</value>
+  </data>
+  <data name="Micron03" xml:space="preserve">
+    <value>0.3μm</value>
+  </data>
+  <data name="Micron05" xml:space="preserve">
+    <value>0.5μm</value>
+  </data>
+  <data name="Micron10" xml:space="preserve">
+    <value>1.0μm</value>
+  </data>
+  <data name="Micron100" xml:space="preserve">
+    <value>10.0μm</value>
+  </data>
+  <data name="Micron30" xml:space="preserve">
+    <value>3.0μm</value>
+  </data>
+  <data name="Micron50" xml:space="preserve">
+    <value>5.0μm</value>
+  </data>
+  <data name="MonitorMode" xml:space="preserve">
+    <value>All locations enter monitor mode</value>
+  </data>
+  <data name="OccurTime" xml:space="preserve">
+    <value>Occur Time</value>
+  </data>
+  <data name="OnlineMonitor" xml:space="preserve">
+    <value>Online Monitoring</value>
+  </data>
+  <data name="OperateUser" xml:space="preserve">
+    <value>Operating user</value>
+  </data>
+  <data name="Oxygen" xml:space="preserve">
+    <value>Oxygen</value>
+  </data>
+  <data name="ParticleCounting" xml:space="preserve">
+    <value>Particle Counter</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="PositionReport" xml:space="preserve">
+    <value>Position {0} generated report</value>
+  </data>
+  <data name="Press" xml:space="preserve">
+    <value>Pressure(Pa)</value>
+  </data>
+  <data name="RecordHistory" xml:space="preserve">
+    <value>Data record query</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>Program restart</value>
+  </data>
+  <data name="RH" xml:space="preserve">
+    <value>Humidity(%RH)</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SetAlerter" xml:space="preserve">
+    <value>Set alerter</value>
+  </data>
+  <data name="SomeMonitorMode" xml:space="preserve">
+    <value>{0} enter monitor mode</value>
+  </data>
+  <data name="StartMonitor" xml:space="preserve">
+    <value>Start monitor</value>
+  </data>
+  <data name="StopMonitor" xml:space="preserve">
+    <value>Stop monitor</value>
+  </data>
+  <data name="SystemFunction" xml:space="preserve">
+    <value>System Function</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>Temperature(℃)</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="UpdateRecord" xml:space="preserve">
+    <value>Update Records</value>
+  </data>
+  <data name="UpdateRole" xml:space="preserve">
+    <value>Update Role</value>
+  </data>
+  <data name="UpdateRoleDetail" xml:space="preserve">
+    <value> {0} update succeed</value>
+  </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>Update User</value>
+  </data>
+  <data name="UpdateUserDetail" xml:space="preserve">
+    <value> {0} update succeed</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="Wind" xml:space="preserve">
+    <value>Wind(m/s)</value>
+  </data>
+</root>

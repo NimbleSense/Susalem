@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AirborneMicrobe" xml:space="preserve">
+    <value>浮游菌</value>
+  </data>
+  <data name="Alarm" xml:space="preserve">
+    <value>报警</value>
+  </data>
+  <data name="AlarmHistory" xml:space="preserve">
+    <value>告警历史查询</value>
+  </data>
+  <data name="Audit" xml:space="preserve">
+    <value>审计追踪</value>
+  </data>
+  <data name="AuditHistory" xml:space="preserve">
+    <value>审计追踪记录查询</value>
+  </data>
+  <data name="AuditReport" xml:space="preserve">
+    <value>审计追踪记录导出成功</value>
+  </data>
+  <data name="Cabinet" xml:space="preserve">
+    <value>柜子</value>
+  </data>
+  <data name="ChangePwd" xml:space="preserve">
+    <value>用户 {0} 密码修改成功</value>
+  </data>
+  <data name="ChartSearch" xml:space="preserve">
+    <value>数据曲线记录查询</value>
+  </data>
+  <data name="CloudFailed" xml:space="preserve">
+    <value>连接失败</value>
+  </data>
+  <data name="ConfirmAlarm" xml:space="preserve">
+    <value>确认报警</value>
+  </data>
+  <data name="ConfirmMultiAlarm" xml:space="preserve">
+    <value>多条报警确认成功</value>
+  </data>
+  <data name="ConfirmSingleAlarm" xml:space="preserve">
+    <value>单条报警确认成功</value>
+  </data>
+  <data name="CreateRole" xml:space="preserve">
+    <value>创建角色</value>
+  </data>
+  <data name="CreateRoleDetail" xml:space="preserve">
+    <value>角色 {0} 创建成功</value>
+  </data>
+  <data name="CreateUser" xml:space="preserve">
+    <value>创建用户</value>
+  </data>
+  <data name="CreateUserDetail" xml:space="preserve">
+    <value>用户 {0} 创建成功</value>
+  </data>
+  <data name="DeleteAlarm" xml:space="preserve">
+    <value>删除告警记录</value>
+  </data>
+  <data name="DeleteAudit" xml:space="preserve">
+    <value>删除审计追踪</value>
+  </data>
+  <data name="DeleteRecord" xml:space="preserve">
+    <value>删除数据记录</value>
+  </data>
+  <data name="DeleteRole" xml:space="preserve">
+    <value>删除角色</value>
+  </data>
+  <data name="DeleteRoleDetail" xml:space="preserve">
+    <value>角色 {0} 删除成功</value>
+  </data>
+  <data name="DeleteUser" xml:space="preserve">
+    <value>删除用户</value>
+  </data>
+  <data name="DeleteUserDetail" xml:space="preserve">
+    <value>用户 {0} 删除成功</value>
+  </data>
+  <data name="Desc" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="DewPoint" xml:space="preserve">
+    <value>露点</value>
+  </data>
+  <data name="DisableBuzzing" xml:space="preserve">
+    <value>禁用蜂鸣器</value>
+  </data>
+  <data name="DisableLighting" xml:space="preserve">
+    <value>禁用报警灯</value>
+  </data>
+  <data name="EnableBuzzing" xml:space="preserve">
+    <value>启用蜂鸣器</value>
+  </data>
+  <data name="EnableLighting" xml:space="preserve">
+    <value>启用报警灯</value>
+  </data>
+  <data name="Environment" xml:space="preserve">
+    <value>环境参数</value>
+  </data>
+  <data name="Event" xml:space="preserve">
+    <value>事件</value>
+  </data>
+  <data name="ExitMonitorMode" xml:space="preserve">
+    <value>{0} 退出监控模式</value>
+  </data>
+  <data name="ExitMonitorMode2" xml:space="preserve">
+    <value>所有点位退出监控模式</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="ExportAlarm" xml:space="preserve">
+    <value>导出告警</value>
+  </data>
+  <data name="ExportAlarmSuccess" xml:space="preserve">
+    <value>告警记录导出成功</value>
+  </data>
+  <data name="Flow" xml:space="preserve">
+    <value>流量</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>湿度(%RH)</value>
+  </data>
+  <data name="Humiture" xml:space="preserve">
+    <value>温湿度</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>登陆</value>
+  </data>
+  <data name="LoginSuccess" xml:space="preserve">
+    <value>用户进入系统</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>登出</value>
+  </data>
+  <data name="LogoutSuccess" xml:space="preserve">
+    <value>用户登出系统</value>
+  </data>
+  <data name="Micron01" xml:space="preserve">
+    <value>0.1μm</value>
+  </data>
+  <data name="Micron02" xml:space="preserve">
+    <value>0.2μm</value>
+  </data>
+  <data name="Micron03" xml:space="preserve">
+    <value>0.3μm</value>
+  </data>
+  <data name="Micron05" xml:space="preserve">
+    <value>0.5μm</value>
+  </data>
+  <data name="Micron10" xml:space="preserve">
+    <value>1.0μm</value>
+  </data>
+  <data name="Micron100" xml:space="preserve">
+    <value>10.0μm</value>
+  </data>
+  <data name="Micron30" xml:space="preserve">
+    <value>3.0μm</value>
+  </data>
+  <data name="Micron50" xml:space="preserve">
+    <value>5.0μm</value>
+  </data>
+  <data name="MonitorMode" xml:space="preserve">
+    <value>所有点位进入监控模式</value>
+  </data>
+  <data name="Nitrogen" xml:space="preserve">
+    <value>氮气(%)</value>
+  </data>
+  <data name="OccurTime" xml:space="preserve">
+    <value>发生时间</value>
+  </data>
+  <data name="OnlineMonitor" xml:space="preserve">
+    <value>在线监控</value>
+  </data>
+  <data name="OperateUser" xml:space="preserve">
+    <value>操作用户</value>
+  </data>
+  <data name="Oxygen" xml:space="preserve">
+    <value>氧气(%)</value>
+  </data>
+  <data name="ParticleCounting" xml:space="preserve">
+    <value>粒子计数</value>
+  </data>
+  <data name="Position" xml:space="preserve">
+    <value>点位</value>
+  </data>
+  <data name="PositionReport" xml:space="preserve">
+    <value>点位 {0} 报告记录导出成功</value>
+  </data>
+  <data name="Press" xml:space="preserve">
+    <value>压差(Pa)</value>
+  </data>
+  <data name="RecordHistory" xml:space="preserve">
+    <value>数据记录查询</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>报告</value>
+  </data>
+  <data name="Restart" xml:space="preserve">
+    <value>程序重启</value>
+  </data>
+  <data name="RH" xml:space="preserve">
+    <value>湿度(%)</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>查询</value>
+  </data>
+  <data name="SetAlerter" xml:space="preserve">
+    <value>设置报警器</value>
+  </data>
+  <data name="SomeMonitorMode" xml:space="preserve">
+    <value>{0} 进入监控模式</value>
+  </data>
+  <data name="StartMonitor" xml:space="preserve">
+    <value>开启监控</value>
+  </data>
+  <data name="StopMonitor" xml:space="preserve">
+    <value>停止监控</value>
+  </data>
+  <data name="SystemFunction" xml:space="preserve">
+    <value>系统功能</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>温度(℃)</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>时间</value>
+  </data>
+  <data name="UpdateRecord" xml:space="preserve">
+    <value>更新数据记录</value>
+  </data>
+  <data name="UpdateRole" xml:space="preserve">
+    <value>更新角色</value>
+  </data>
+  <data name="UpdateRoleDetail" xml:space="preserve">
+    <value>角色 {0} 更新成功</value>
+  </data>
+  <data name="UpdateUser" xml:space="preserve">
+    <value>更新用户</value>
+  </data>
+  <data name="UpdateUserDetail" xml:space="preserve">
+    <value>用户 {0} 更新成功</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>体积</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>预警</value>
+  </data>
+  <data name="Wind" xml:space="preserve">
+    <value>风速(m/s)</value>
+  </data>
+</root>
