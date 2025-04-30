@@ -18,9 +18,10 @@ Susalem是一个开源的线体MES项目，但是这样说并不完全正确，�
 wpf，webapi-old部分使用.NET6开发，orm使用EFcore。
 其余直接还原nuget包即可，如有第三方dll我们会在单独package中给出相关依赖。
 
-注意：目前保持更新的是webapi文件夹中的内容，他对应的前端代码在：
+注意：目前保持更新的是webapi文件夹中的内容，avalonia目前暂时停止更新，wpf部分随缘更新。目前主要集中力量跟新后端和前端vue3版本的升级工作。
+webapi对应的前端代码在：
 https://github.com/NimbleSense/Susalem.Vue
-目前前端vue2部分使用vue2开发，所需要的node环境为16.17（建议使用nvm进行包管理）
+目前前端部分使用vue2开发，所需要的node环境为16.17（建议使用nvm进行包管理）
 
 webapi部分有两个上下文，需要分别执行，一个DataContext是认证授权部分的，还有一个DataContext是业务部分的。其余还原nuget包即可。
 如何实在执行不起来，请移步b站视频教程：
