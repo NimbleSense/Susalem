@@ -12,9 +12,17 @@ Susalem是一个开源的线体MES项目，但是这样说并不完全正确，�
 
 #### 安装教程
 
-wpf部分使用.NET6开发，orm使用EFcore。
+wpf，webapi-old部分使用.NET6开发，orm使用EFcore。
 其余直接还原nuget包即可，如有第三方dll我们会在单独package中给出相关依赖。
 
+注意：目前保持更新的是webapi文件夹中的内容，他对应的前端代码在：
+https://github.com/NimbleSense/Susalem.Vue
+目前前端vue2部分使用vue2开发，所需要的node环境为16.17（建议使用nvm进行包管理）
+
+webapi部分有两个上下文，需要分别执行，一个DataContext是认证授权部分的，还有一个DataContext是业务部分的。其余还原nuget包即可。
+如何实在执行不起来，请移步b站视频教程：
+https://www.bilibili.com/video/BV19cdCY4E2p/
+但视频讲解可能不是非常的详细，如果仍然没有解决你的问题，欢迎提issue或者wechat联系我们。
 #### 使用说明
 1.为方便初学的朋友能够更好的接触本项目,项目中会拆出EasyDemo部分，如果觉得阅读全部代码很吃力，可以单独阅读EasyDemo部分(最近有群友反应，，，easydemo都看不懂。。。那。。。要不去B站继续学习我猛哥视频？学完再来看EasyDemo...)。如果觉得还有其他需要拆分的EasyDemo部分，请联系开发者或者提Issue.
 
