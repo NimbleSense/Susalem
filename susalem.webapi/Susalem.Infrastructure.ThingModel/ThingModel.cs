@@ -22,12 +22,22 @@
 
     public class DataType
     {
+        public DataType(string type,string byteOrder)
+        {
+            Type = type;
+            ByteOrder = byteOrder;
+        }
         public string Type { get; set; }
         public string ByteOrder { get; set; }
     }
 
     public class Metadata
     {
+        public Metadata(string unit, int precision)
+        {
+            Unit = unit;
+            Precision = precision;
+        }
         public string Unit { get; set; }
         public int Precision { get; set; }
     }
@@ -44,12 +54,18 @@
 
     public class Trigger
     {
+        /// <summary>
+        /// 触发器类型
+        /// </summary>
         public string Type { get; set; }
         public int Interval { get; set; }
     }
 
     public class Optimization
     {
+        /// <summary>
+        /// 自动合并相邻地址
+        /// </summary>
         public bool MergeAdjacent { get; set; }
         public string RetryPolicy { get; set; }
     }
