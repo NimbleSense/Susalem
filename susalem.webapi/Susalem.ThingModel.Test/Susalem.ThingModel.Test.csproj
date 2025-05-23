@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Demo.json" />
+  </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Quartz" Version="3.14.0" />
+		<PackageReference Include="RulesEngine" Version="5.0.6" />
+		<PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
+		<PackageReference Include="Serilog.Sinks.Seq" Version="5.2.2" />
+	</ItemGroup>
+	
+  <ItemGroup>
+    <EmbeddedResource Include="Demo.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+	
+  <ItemGroup>
+    <ProjectReference Include="..\Susalem.API\Susalem.API.csproj" />
+    <ProjectReference Include="..\Susalem.Infrastructure.ThingModel\Susalem.Infrastructure.ThingModel.csproj" />
+    <ProjectReference Include="..\Susalem.Infrastructure\Susalem.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

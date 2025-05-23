@@ -1,0 +1,75 @@
+{
+  "Name": "Test1",
+  "Description": "Test模型1",
+  "Properties": [
+    {
+      "Key": "Temp", // 全局唯一标识
+      "Name": "温度",
+      "Address": 30001,
+      "Length": 1,
+      "DataType": {
+        "Type": "Float32",
+        "ByteOrder": "ABCD" // 明确字节顺序
+      },
+      "Expression": "raw / 10.0",
+      "Metadata": {
+        "Unit": "℃",
+        "Precision": 1
+      }
+    },
+    {
+      "Key": "Humidity", // 全局唯一标识
+      "Name": "湿度",
+      "Address": 30002,
+      "Length": 1,
+      "DataType": {
+        "Type": "Float32",
+        "ByteOrder": "ABCD" // 明确字节顺序
+      },
+      "Expression": "raw / 15.0",
+      "Metadata": {
+        "Unit": "℃",
+        "Precision": 1
+      }
+    }
+
+  ],
+  "ReadConfigs": [
+    {
+      "Name": "BasicParams",
+      "FunctionCode": 4,
+      "Mode": "Batch",
+      "Trigger": {
+        "Type": "Periodic", // 定时触发
+        "Interval": 5000
+      },
+      "PropertyKeys": [ "Temp", "Humidity" ], // 关联属性
+      "Optimization": {
+        "MergeAdjacent": true, // 自动合并相邻地址
+        "RetryPolicy": "ExponentialBackoff"
+      }
+    }
+  ],
+
+  "CommandConfigs": [
+    {
+      "Name": "SetPressure",
+      "FunctionCode": 16,
+      "Parameters": [
+        {
+          "Name": "targetValue",
+          "DataType": "Float32", // 支持的类型：Bool/Int16/UInt16/Int32/UInt32/Float32
+          "Address": 40001,
+          "ByteOrder": "BigEndian",
+          "Transform": {
+            "Expression": "value * 10", // 输入值预处理
+            "Validation": {
+              "Min": 0.0,
+              "Max": 100.0
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

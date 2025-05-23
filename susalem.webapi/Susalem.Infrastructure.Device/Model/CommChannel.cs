@@ -45,6 +45,12 @@ public class CommChannel : ICommChannel
         _monitorDriver = CreateDriver();
     }
 
+    public CommChannel(ChannelQueryModel channel)
+    {
+        _channel = channel;
+        _monitorDriver = CreateDriver();
+    }
+
     private IMonitorDriver CreateDriver()
     {
         switch (_channel.ChannelType)
