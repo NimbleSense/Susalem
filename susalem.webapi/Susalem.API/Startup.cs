@@ -81,7 +81,7 @@ namespace Susalem.Api
                         },
                         new string[]{}
                     }
-                });
+                }); 
             });
 
             services.AddDatabasePersistence(Configuration);

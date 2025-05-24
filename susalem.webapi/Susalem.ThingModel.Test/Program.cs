@@ -5,6 +5,8 @@ using Susalem.Infrastructure.Services.DbInitializerService;
 using Serilog;
 using Microsoft.AspNetCore.Hosting;
 using Susalem.ThingModel.Test.MobudsThing;
+using Quartz.Impl;
+using Quartz;
 
 namespace Susalem.ThingModel.Test
 {
@@ -12,6 +14,7 @@ namespace Susalem.ThingModel.Test
     {
         public static async Task Main(string[] args)
         {
+            CreateTrigger();
             var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
@@ -36,6 +39,7 @@ namespace Susalem.ThingModel.Test
                 }
             }
             host.Run();
+            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -46,5 +50,37 @@ namespace Susalem.ThingModel.Test
                     webBuilder.UseStartup<Startup>();
                 })
                 .UseWindowsService();
+
+        public static void CreateTrigger()
+        {
+            StdSchedulerFactory factory = new StdSchedulerFactory();
+            IScheduler scheduler = factory.GetScheduler().Result;
+            IJobDetail job = JobBuilder.Create<ThingConnectTask>()
+                         .WithIdentity("jobConnect", "jobGroup")      //唯一标识
+                         .StoreDurably(true)                     //即时没有指定的触发器，该job也会被存储
+                         .WithDescription("定时重连")        //该作业的描述信息
+                         .RequestRecovery(true)                  //如果当前任务崩溃，则会重新执行该作业
+                         .Build();
+
+            //创建一个触发器
+            ITrigger trigger =
+                TriggerBuilder.Create()                                  //获取TriggerBuilder
+                              .StartNow()                                //马上开始
+                              .ForJob(job)                               //将触发器关联给指定的job
+                              .WithPriority(10)                          //优先级，当触发时间一样时，优先级大的触发器先执行
+                              .WithIdentity("tname1", "group1")          //添加名字和分组
+                              .WithSimpleSchedule(x => x.WithInterval(TimeSpan.FromMilliseconds(2000)) //调度，一秒执行一次，执行三次
+                                                        .WithRepeatCount(100)
+                                                        .Build())
+                              .Build();
+            scheduler.ScheduleJob(job, trigger);
+            scheduler.Start();
+        }
+
+
+        public void Connect()
+        {
+            
+        }
     }
 }

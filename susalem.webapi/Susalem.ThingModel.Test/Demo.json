@@ -1,6 +1,14 @@
 {
   "Name": "Test1",
   "Description": "Test模型1",
+  "IsConnect": false,
+  "DeviceCollectionPro": 2,
+  "ConnectString": "\"host\":\"127.0.0.1\",\"port\":502",
+  "CommonSetting": {
+    "WriteTimeout": 2000,
+    "ReadTimeout": 2000,
+    "DeviceInterval": 300
+  },
   "Properties": [
     {
       "Key": "Temp", // 全局唯一标识

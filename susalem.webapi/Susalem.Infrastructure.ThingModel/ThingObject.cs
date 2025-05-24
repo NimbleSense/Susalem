@@ -1,4 +1,5 @@
 ﻿using MassTransit.Futures.Contracts;
+using Susalem.Messages.Features.Channel;
 using System.Collections.Generic;
 
 namespace Susalem.Infrastructure.ThingModel
@@ -36,7 +37,7 @@ namespace Susalem.Infrastructure.ThingModel
         /// <summary>
         /// 通用设置
         /// </summary>
-        public string CommonSetting { get; set; }
+        public CommonSetting CommonSetting { get; set; }
 
         /// <summary>
         /// 设备的属性类型

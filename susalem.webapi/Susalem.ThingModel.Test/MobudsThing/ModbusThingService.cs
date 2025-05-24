@@ -47,51 +47,51 @@ namespace Susalem.ThingModel.Test.MobudsThing
         private void BackgroundProcessing(ICommChannel channel, CancellationToken stoppingToken)
         {
 
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                try
-                {
-                    if (channel.Status == ChannelStatus.Offline)
-                    {
-                        if (!channel.MonitorDriver.Connect())
-                        {
-                            _logger.LogError("Monitor driver {ChannelName} connect failed, after 5s will retry connect", channel.Channel.Name);
-                            Thread.Sleep(5 * 1000);
-                            continue;
-                        }
-                    }
-                    var deviceInterval = channel.Channel.Settings.DeviceInterval;
-                    if (deviceInterval <= 0)
-                    {
-                        deviceInterval = 300;
-                    }
-                    //设备遍历引擎进行更新数据
-                    //查看设备的运行时间来暂停和恢复设备
-                    foreach (var deviceEngine in engines)
-                    {
-                        if (channel.Status == ChannelStatus.Offline)
-                        {
-                            break;
-                        }
-                        _logger.LogDebug($"Channel: {channel.Channel.Name}, Device address: {deviceEngine.BasicInfo.Address}");
-                        if (deviceEngine.UpdateTelemetries())
-                        {
-                            foreach (var deviceEngineTelemetry in deviceEngine.Telemetries)
-                            {
-                                _logger.LogDebug($" {deviceEngineTelemetry.Key} : {deviceEngineTelemetry.OriginalValue} => {deviceEngineTelemetry.Value} ");
-                            }
-                        }
+            //while (!stoppingToken.IsCancellationRequested)
+            //{
+            //    try
+            //    {
+            //        if (channel.Status == ChannelStatus.Offline)
+            //        {
+            //            if (!channel.MonitorDriver.Connect())
+            //            {
+            //                _logger.LogError("Monitor driver {ChannelName} connect failed, after 5s will retry connect", channel.Channel.Name);
+            //                Thread.Sleep(5 * 1000);
+            //                continue;
+            //            }
+            //        }
+            //        var deviceInterval = channel.Channel.Settings.DeviceInterval;
+            //        if (deviceInterval <= 0)
+            //        {
+            //            deviceInterval = 300;
+            //        }
+            //        //设备遍历引擎进行更新数据
+            //        //查看设备的运行时间来暂停和恢复设备
+            //        foreach (var deviceEngine in engines)
+            //        {
+            //            if (channel.Status == ChannelStatus.Offline)
+            //            {
+            //                break;
+            //            }
+            //            _logger.LogDebug($"Channel: {channel.Channel.Name}, Device address: {deviceEngine.BasicInfo.Address}");
+            //            if (deviceEngine.UpdateTelemetries())
+            //            {
+            //                foreach (var deviceEngineTelemetry in deviceEngine.Telemetries)
+            //                {
+            //                    _logger.LogDebug($" {deviceEngineTelemetry.Key} : {deviceEngineTelemetry.OriginalValue} => {deviceEngineTelemetry.Value} ");
+            //                }
+            //            }
 
-                        Thread.Sleep(deviceInterval);
-                    }
+            //            Thread.Sleep(deviceInterval);
+            //        }
 
-                    _logger.LogDebug("End Loop Devices");
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError($"Loop devices exception: {ex}");
-                }
-            }
+            //        _logger.LogDebug("End Loop Devices");
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        _logger.LogError($"Loop devices exception: {ex}");
+            //    }
+            //}
         }
     }
 }

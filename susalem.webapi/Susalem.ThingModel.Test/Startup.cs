@@ -51,7 +51,7 @@ namespace Susalem.ThingModel.Test
             services.AddDatabasePersistence(Configuration);
 
             services.AddSharedService(Configuration);
-            services.AddInfrastructureLayer(Configuration);
+            //services.AddInfrastructureLayer(Configuration);
 
             var jwtOptions = Configuration.GetRequiredSection("JWT").Get<JwtIssuerOptions>();
 
