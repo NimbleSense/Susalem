@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MassTransit.Futures.Contracts;
+using System.Collections.Generic;
 
 namespace Susalem.Infrastructure.ThingModel
 {
@@ -11,10 +12,11 @@ namespace Susalem.Infrastructure.ThingModel
         HTTP
     }
 
+
     /// <summary>
     /// 设备模型
     /// </summary>
-    public class DeviceModel
+    public class ThingObject
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -25,6 +27,16 @@ namespace Susalem.Infrastructure.ThingModel
         /// 设备采集协议类型
         /// </summary>
         public DeviceCollectionPro DeviceCollectionPro { get; set; }
+
+        /// <summary>
+        /// 设备连接字符串
+        /// </summary>
+        public string ConnectString{ get; set; }
+
+        /// <summary>
+        /// 通用设置
+        /// </summary>
+        public string CommonSetting { get; set; }
 
         /// <summary>
         /// 设备的属性类型

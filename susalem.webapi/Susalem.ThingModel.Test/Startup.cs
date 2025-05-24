@@ -58,7 +58,6 @@ namespace Susalem.ThingModel.Test
   
             services.AddSingleton<IReportService, ReportService>();
             services.AddSingleton<IPlatformService, PlatformService>();
-            services.AddSingleton<IEmailSender, EmailSender>();
 
             services.AddLocalization();
             services.AddRequestLocalization(options =>
