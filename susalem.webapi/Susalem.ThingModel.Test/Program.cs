@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Susalem.ThingModel.Test.MobudsThing;
 using Quartz.Impl;
 using Quartz;
+using Susalem.Infrastructure.ThingModel;
+using Newtonsoft.Json;
+using Susalem.Messages.Features.Channel;
 
 namespace Susalem.ThingModel.Test
 {
@@ -78,9 +81,11 @@ namespace Susalem.ThingModel.Test
         }
 
 
-        public void Connect()
+        public void InstantiateDevice()
         {
-            
+            string txt = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"Demos\Demo.json"));
+            ThingObject thing = JsonConvert.DeserializeObject<ThingObject>(txt);
+            Appsession.Devices.Add(thing);
         }
     }
 }

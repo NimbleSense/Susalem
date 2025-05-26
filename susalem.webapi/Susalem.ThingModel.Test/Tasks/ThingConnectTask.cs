@@ -19,7 +19,7 @@ namespace Susalem.ThingModel.Test
         public IList<ThingObject> Devices { get; }
         public async Task Execute(IJobExecutionContext context)
         {
-            for(int i=0;i<Appsession.MonitorDrivers.Count;i++)
+            for (int i = 0; i < Appsession.MonitorDrivers.Count; i++)
             {
                 var item = Appsession.MonitorDrivers[i];
                 var currentDevice = Appsession.Devices[i];
@@ -34,7 +34,7 @@ namespace Susalem.ThingModel.Test
                         item = modbusRtuDeviceBase;
                     }
                 }
-                else if(currentDevice.DeviceCollectionPro == DeviceCollectionPro.ModbusTcp)
+                else if (currentDevice.DeviceCollectionPro == DeviceCollectionPro.ModbusTcp)
                 {
                     // TestData
                     if (!item.IsConnected)
@@ -42,7 +42,7 @@ namespace Susalem.ThingModel.Test
                         var tcpSetting = JsonConvert.DeserializeObject<TcpSetting>(currentDevice.ConnectString);
                         ModbusTcpDeviceBase modbusTcpDeviceBase = new ModbusTcpDeviceBase(tcpSetting, currentDevice.CommonSetting, _logger);
                         modbusTcpDeviceBase.Connect();
-                    } 
+                    }
                 }
 
 

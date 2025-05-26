@@ -59,23 +59,25 @@ namespace Susalem.Infrastructure.ThingModel
     {
         public string Key { get; set; }
         public string Name { get; set; }
-        public int Address { get; set; }
 
-        /// <summary>
-        /// 地址长度
-        /// </summary>
-        public int Length { get; set; }
-        public DataType DataType { get; set; }
+        public object CurrentValue { get; set; }    
 
+        
         /// <summary>
         /// 计算表达式
         /// </summary>
         public string Expression { get; set; }
 
-        /// <summary>
-        /// 原数据
-        /// </summary>
-        public Metadata Metadata { get; set; }
+        ///// <summary>
+        ///// 原数据
+        ///// </summary>
+        //public Metadata Metadata { get; set; }
+
+        ///// <summary>
+        ///// 地址长度
+        ///// </summary>
+        //public int Length { get; set; }
+        //public DataType DataType { get; set; }
     }
 
     public class DataType
@@ -99,7 +101,13 @@ namespace Susalem.Infrastructure.ThingModel
 
     public class ReadConfig
     {
+        /// <summary>
+        /// 关联Properties 里的名字
+        /// </summary>
         public string Name { get; set; }
+
+        public object CurrentValue { get; set; }
+
         public int FunctionCode { get; set; }
         public string Mode { get; set; }
         public Trigger Trigger { get; set; }
@@ -107,8 +115,9 @@ namespace Susalem.Infrastructure.ThingModel
         /// <summary>
         /// 关联属性
         /// </summary>
-        public List<string> PropertyKeys { get; set; }
-        public Optimization Optimization { get; set; }
+        //public List<string> PropertyKeys { get; set; }
+        
+        //public Optimization Optimization { get; set; }
     }
 
     public class Trigger
@@ -116,8 +125,15 @@ namespace Susalem.Infrastructure.ThingModel
         /// <summary>
         /// 触发器类型
         /// </summary>
-        public string Type { get; set; }
+        public TriggerType Type { get; set; }
         public int Interval { get; set; }
+    }
+
+    public enum TriggerType
+    {
+        Interval = 0,
+        Cron = 1 ,
+        Event = 2
     }
 
     public class Optimization
@@ -129,17 +145,43 @@ namespace Susalem.Infrastructure.ThingModel
         public string RetryPolicy { get; set; }
     }
 
+    /// <summary>
+    /// 触发式写命令
+    /// </summary>
     public class CommandConfig
     {
-        public string Name { get; set; }
-        public int FunctionCode { get; set; }
+        /// <summary>
+        /// 全局唯一写入键
+        /// </summary>
+        public string Key { get; set; }
+        public Trigger Trigger { get; set; }
+
+        public event EventHandler<object> OnWriteCommand
+        {
+            add
+            {
+                value.Invoke(this, Key);
+                OnWriteCommand += value; 
+            } 
+            remove { OnWriteCommand -= value; }
+        }
+
         public List<CommandParameter> Parameters { get; set; }
     }
 
     public class CommandParameter
     {
-        public string Name { get; set; }
+        public int FunctionCode { get; set; }
+
+        /// <summary>
+        /// 读取或者写入的长度
+        /// </summary>
+        public int Length { get; set; }
         public string DataType { get; set; }
+
+        /// <summary>
+        /// 寄存器或线圈地址
+        /// </summary>
         public int Address { get; set; }
         public string ByteOrder { get; set; }
         public Transform Transform { get; set; }
