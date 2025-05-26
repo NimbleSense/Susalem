@@ -106,18 +106,25 @@ namespace Susalem.Infrastructure.ThingModel
         /// </summary>
         public string Name { get; set; }
 
-        public object CurrentValue { get; set; }
-
         public int FunctionCode { get; set; }
+
+        public int Length { get; set; }
+
+        public string Address { get; set; }
+
         public string Mode { get; set; }
+
+        public string Expression { get; set; }
         public Trigger Trigger { get; set; }
 
         /// <summary>
         /// 关联属性
         /// </summary>
-        //public List<string> PropertyKeys { get; set; }
-        
-        //public Optimization Optimization { get; set; }
+        public List<string> PropertyKeys { get; set; }
+
+        public Optimization Optimization { get; set; }
+
+
     }
 
     public class Trigger
@@ -155,6 +162,7 @@ namespace Susalem.Infrastructure.ThingModel
         /// </summary>
         public string Key { get; set; }
         public Trigger Trigger { get; set; }
+        public int FunctionCode { get; set; }
 
         public event EventHandler<object> OnWriteCommand
         {
@@ -171,12 +179,11 @@ namespace Susalem.Infrastructure.ThingModel
 
     public class CommandParameter
     {
-        public int FunctionCode { get; set; }
-
         /// <summary>
         /// 读取或者写入的长度
         /// </summary>
         public int Length { get; set; }
+
         public string DataType { get; set; }
 
         /// <summary>
@@ -184,7 +191,10 @@ namespace Susalem.Infrastructure.ThingModel
         /// </summary>
         public int Address { get; set; }
         public string ByteOrder { get; set; }
-        public Transform Transform { get; set; }
+       // public Transform Transform { get; set; }
+
+        public string Expression { get; set; }
+        public Validation Validation { get; set; }
     }
 
     public class Transform

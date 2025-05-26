@@ -17,6 +17,12 @@ namespace Susalem.ThingModel.Test
         private readonly ILogger<ThingConnectTask> _logger;
         public IList<ICommChannel> Channels { get; } = new List<ICommChannel>();
         public IList<ThingObject> Devices { get; }
+
+        public ThingConnectTask()
+        {
+            Console.WriteLine("Test");
+        }
+
         public async Task Execute(IJobExecutionContext context)
         {
             for (int i = 0; i < Appsession.MonitorDrivers.Count; i++)
@@ -42,10 +48,9 @@ namespace Susalem.ThingModel.Test
                         var tcpSetting = JsonConvert.DeserializeObject<TcpSetting>(currentDevice.ConnectString);
                         ModbusTcpDeviceBase modbusTcpDeviceBase = new ModbusTcpDeviceBase(tcpSetting, currentDevice.CommonSetting, _logger);
                         modbusTcpDeviceBase.Connect();
+                        item = modbusTcpDeviceBase;
                     }
                 }
-
-
             }
 
             Console.WriteLine("连接设备");

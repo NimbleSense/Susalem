@@ -8,7 +8,7 @@ using NModbus.Serial;
 
 namespace Susalem.Infrastructure.ThingModel
 {
-    public class ModbusRtuDeviceBase : IMonitorDriver
+    public class ModbusRtuDeviceBase : IThingObjectDriver
     {
         private readonly SerialSetting _setting;
         private readonly ILogger _logger;
@@ -59,7 +59,7 @@ namespace Susalem.Infrastructure.ThingModel
             _serialPort.Close();
         }
 
-        public bool Execute(int address, EngineCommand command)
+        public bool ExecuteReg(int address, WriteCommandDto command)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace Susalem.Infrastructure.ThingModel
             }
         }
 
-        public bool Execute(int address, IList<EngineCommand> commands)
+        public bool ExecuteRegs(int address, IList<WriteCommandDto> commands)
         {
             try
             {
@@ -89,7 +89,7 @@ namespace Susalem.Infrastructure.ThingModel
             }
         }
 
-        public bool Read(int address, IList<EngineTelemetry> telemetries)
+        public bool ReadRegs(int address, IList<ThingCommandDto> telemetries)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace Susalem.Infrastructure.ThingModel
             }
         }
 
-        public bool Write(int address, IList<EngineTelemetry> telemetries)
+        public bool ExecuteComputedRegs(int address, IList<ThingCommandDto> telemetries)
         {
             try
             {
@@ -158,92 +158,8 @@ namespace Susalem.Infrastructure.ThingModel
             }
         }
 
-        public bool Read(int address, IList<DoorStatus> doors)
-        {
-            try
-            {
-                var data = _serialMaster.ReadHoldingRegisters((byte)address, 209, 4).ToList();
-                for (var i = 0; i < data.Count; i++)
-                {
-                    doors[i].Open = data[i] == 0;
-                }
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Modbus read door error, Com: {_setting.PortName}, Address: {address}, {e}");
-                return false;
-            }
-        }
-
-        public bool ReadDebugData(int address, IList<DebugData> datas)
-        {
-            try
-            {
-                var orderedDatas = datas.OrderBy(t => t.Reg);
-                var startReg = orderedDatas.First().Reg;
-
-                var length = (orderedDatas.Last().Reg + orderedDatas.Last().Length) - startReg;
-
-                var data = _serialMaster.ReadHoldingRegisters((byte)address, startReg, (ushort)length).ToList();
-
-                foreach (var debugData in datas)
-                {
-                    var telemetryData = data.GetRange(debugData.Reg - startReg, debugData.Length);
-                    if (telemetryData.Count > 1)
-                    {
-                        debugData.Value = Math.Round(ModbusUtility.GetSingle(telemetryData[0], telemetryData[1]), 1);
-                    }
-                    else
-                    {
-                        debugData.Value = telemetryData.First();
-                    }
-                }
-
-                return true;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Modbus read debug data error, Com: {_setting.PortName}, Address: {address}, {e}");
-                return false;
-            }
-        }
-
-        public bool WriteDebugData(int address, DebugData data)
-        {
-            try
-            {
-                var regDatas = new ushort[data.Length];
-                if (data.Length > 1)
-                {
-                    var writeData = BitConverter.GetBytes((float)data.Value);
-
-                    regDatas[1] = BitConverter.ToUInt16(writeData, 0);
-                    regDatas[0] = BitConverter.ToUInt16(writeData, 2);
-                }
-                else
-                {
-                    var intData = Convert.ToUInt32(data.Value);
-                    var writeData = BitConverter.GetBytes(intData);
-
-                    for (var i = 0; i < regDatas.Length; i++)
-                    {
-                        regDatas[i] = writeData[i];
-                    }
-                }
-
-                _serialMaster.WriteMultipleRegisters((byte)address, data.Reg, regDatas);
-                return true;
-            }
-            catch (Exception e)
-            {
-                _logger.LogError($"Modbus write debug data error, Com: {_setting.PortName}, Address: {address}, {e}");
-                return false;
-            }
-        }
-
-        public bool ExecuteCoil(int address, IList<EngineCommand> commands)
+ 
+        public bool ExecuteCoils(int address, IList<ThingCommandDto> commands)
         {
             try
             {
@@ -271,7 +187,7 @@ namespace Susalem.Infrastructure.ThingModel
             }
         }
 
-        public bool ReadCoil(int address, IList<EngineTelemetry> telemetries)
+        public bool ReadCoils(int address, IList<ThingCommandDto> telemetries)
         {
             try
             {

@@ -10,6 +10,7 @@ using Quartz;
 using Susalem.Infrastructure.ThingModel;
 using Newtonsoft.Json;
 using Susalem.Messages.Features.Channel;
+using System.Text.Json.Serialization.Metadata;
 
 namespace Susalem.ThingModel.Test
 {
@@ -17,6 +18,7 @@ namespace Susalem.ThingModel.Test
     {
         public static async Task Main(string[] args)
         {
+            InstantiateDevice();
             CreateTrigger();
             var host = CreateHostBuilder(args).Build();
 
@@ -54,6 +56,7 @@ namespace Susalem.ThingModel.Test
                 })
                 .UseWindowsService();
 
+
         public static void CreateTrigger()
         {
             StdSchedulerFactory factory = new StdSchedulerFactory();
@@ -86,6 +89,23 @@ namespace Susalem.ThingModel.Test
             string txt = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"Demos\Demo.json"));
             ThingObject thing = JsonConvert.DeserializeObject<ThingObject>(txt);
             Appsession.Devices.Add(thing);
+
+            for(int i=0;i< Appsession.Devices.Count;i++)
+            {
+                var item = Appsession.Devices[i].ReadConfigs;
+                List<ThingCommandDto> dtos = new List<ThingCommandDto>();
+                for (int j = 0;j<item.Count;j++)
+                {
+                    var readConfig = item[j];
+                    dtos.Add(new ThingCommandDto(readConfig.Name, byte.Parse(readConfig.Address), readConfig.Length, readConfig.Expression));
+                }
+                Appsession.ThingCommands.Add(Appsession.Devices[i].Name, dtos);
+
+
+
+            }
+
+
         }
     }
 }

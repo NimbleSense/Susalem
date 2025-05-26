@@ -10,8 +10,10 @@ namespace Susalem.ThingModel.Test
 {
     public class Appsession
     {
-        public static List<ThingObject> Devices { get; } = new List<ThingObject>();
+        public static List<ThingObject> Devices { get; set; } = new List<ThingObject>();
 
-        public static List<IMonitorDriver> MonitorDrivers { get; } = new List<IMonitorDriver>();
+        public static Dictionary<string, List<ThingCommandDto>> ThingCommands = new Dictionary<string, List<ThingCommandDto>>();
+
+        public static List<IThingObjectDriver> MonitorDrivers { get; } = new List<IThingObjectDriver>();
     }
 }
