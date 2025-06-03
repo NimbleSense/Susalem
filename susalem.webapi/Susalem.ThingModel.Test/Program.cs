@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Susalem.ThingModel.Test.MobudsThing;
 using Quartz.Impl;
 using Quartz;
-using Susalem.Infrastructure.ThingModel;
 using Newtonsoft.Json;
 using Susalem.Messages.Features.Channel;
 using System.Text.Json.Serialization.Metadata;
+using Susalem.Infrastructure.ThingModel.Model;
 
 namespace Susalem.ThingModel.Test
 {
@@ -44,7 +44,6 @@ namespace Susalem.ThingModel.Test
                 }
             }
             host.Run();
-            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -75,7 +74,7 @@ namespace Susalem.ThingModel.Test
                               .ForJob(job)                               //将触发器关联给指定的job
                               .WithPriority(10)                          //优先级，当触发时间一样时，优先级大的触发器先执行
                               .WithIdentity("tname1", "group1")          //添加名字和分组
-                              .WithSimpleSchedule(x => x.WithInterval(TimeSpan.FromMilliseconds(2000)) //调度，一秒执行一次，执行三次
+                              .WithSimpleSchedule(x => x.WithInterval(TimeSpan.FromMilliseconds(2000)) //调度，两秒执行一次
                                                         .WithRepeatCount(100)
                                                         .Build())
                               .Build();
@@ -84,7 +83,7 @@ namespace Susalem.ThingModel.Test
         }
 
 
-        public void InstantiateDevice()
+        public static void InstantiateDevice()
         {
             string txt = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"Demos\Demo.json"));
             ThingObject thing = JsonConvert.DeserializeObject<ThingObject>(txt);
@@ -92,16 +91,16 @@ namespace Susalem.ThingModel.Test
 
             for(int i=0;i< Appsession.Devices.Count;i++)
             {
-                var item = Appsession.Devices[i].ReadConfigs;
-                List<ThingCommandDto> dtos = new List<ThingCommandDto>();
-                for (int j = 0;j<item.Count;j++)
-                {
-                    var readConfig = item[j];
-                    dtos.Add(new ThingCommandDto(readConfig.Name, byte.Parse(readConfig.Address), readConfig.Length, readConfig.Expression));
-                }
-                Appsession.ThingCommands.Add(Appsession.Devices[i].Name, dtos);
+                var comConfigs = Appsession.Devices[i].CommandConfigs;
 
 
+                //List<ThingCommandDto> dtos = new List<ThingCommandDto>();
+                //for (int j = 0;j< comConfigs.Count;j++)
+                //{
+                //    var config = comConfigs[j];
+                //    dtos.Add(new ThingCommandDto(config.Name, config.Address, config.Length, config.Expression));
+                //}
+                //Appsession.ThingCommands.Add(Appsession.Devices[i].Name, dtos);
 
             }
 

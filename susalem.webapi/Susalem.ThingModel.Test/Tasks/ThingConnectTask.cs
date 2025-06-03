@@ -5,7 +5,7 @@ using Quartz;
 using Susalem.Core.Application.Interfaces;
 using Susalem.Core.Application.Interfaces.Services;
 using Susalem.Infrastructure.Device.Model;
-using Susalem.Infrastructure.ThingModel;
+using Susalem.Infrastructure.ThingModel.Model;
 using Susalem.Messages.Features.Channel;
 using System.Threading.Channels;
 
@@ -29,26 +29,26 @@ namespace Susalem.ThingModel.Test
             {
                 var item = Appsession.MonitorDrivers[i];
                 var currentDevice = Appsession.Devices[i];
-                if (currentDevice.DeviceCollectionPro == DeviceCollectionPro.ModbusRtu)
+                if (currentDevice.DeviceCollectionPro == MasterType.Rtu)
                 {
                     // TestData
                     if (!item.IsConnected)
                     {
-                        var serialSetting = JsonConvert.DeserializeObject<SerialSetting>(currentDevice.ConnectString);
-                        ModbusRtuDeviceBase modbusRtuDeviceBase = new ModbusRtuDeviceBase(serialSetting, currentDevice.CommonSetting, _logger);
-                        modbusRtuDeviceBase.Connect();
-                        item = modbusRtuDeviceBase;
+                        var serialSetting = currentDevice.SerialSetting;
+                        //ModbusRtuDeviceBase modbusRtuDeviceBase = new ModbusRtuDeviceBase(serialSetting, currentDevice.CommonSetting, _logger);
+                        //modbusRtuDeviceBase.Connect();
+                        //item = modbusRtuDeviceBase;
                     }
                 }
-                else if (currentDevice.DeviceCollectionPro == DeviceCollectionPro.ModbusTcp)
+                else if (currentDevice.DeviceCollectionPro == MasterType.Tcp)
                 {
                     // TestData
                     if (!item.IsConnected)
                     {
-                        var tcpSetting = JsonConvert.DeserializeObject<TcpSetting>(currentDevice.ConnectString);
-                        ModbusTcpDeviceBase modbusTcpDeviceBase = new ModbusTcpDeviceBase(tcpSetting, currentDevice.CommonSetting, _logger);
-                        modbusTcpDeviceBase.Connect();
-                        item = modbusTcpDeviceBase;
+                        var tcpSetting = currentDevice.TcpSetting;
+                        //ModbusTcpDeviceBase modbusTcpDeviceBase = new ModbusTcpDeviceBase(tcpSetting, currentDevice.CommonSetting, _logger);
+                        //modbusTcpDeviceBase.Connect();
+                        //item = modbusTcpDeviceBase;
                     }
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using Susalem.Core.Application.Interfaces.Services;
-using Susalem.Infrastructure.ThingModel;
+using Susalem.Infrastructure.ThingModel.Interface;
+using Susalem.Infrastructure.ThingModel.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
