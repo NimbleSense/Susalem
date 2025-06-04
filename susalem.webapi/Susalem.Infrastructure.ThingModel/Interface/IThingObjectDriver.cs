@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Susalem.Infrastructure.ThingModel.Interface
 {
-    public interface IThingObjectDriver
+    public interface IModbusThingDriver
     {
         public string DeviceId { get; }
         public bool IsConnected { get; }
@@ -24,10 +24,10 @@ namespace Susalem.Infrastructure.ThingModel.Interface
         public bool Close();
 
         //标准数据读取
-        public ThingRetModel Read(ThingIoModel ioArg);
+        public ModbusThingRetModel Read(ModbusThingIoModel ioArg, bool isMultiple);
 
         //Rpc写入
-        public Task<RpcResponse> WriteAsync(string RequestId, string Method, ThingIoModel ioArg);
+        public Task<RpcResponse> WriteAsync(string RequestId, string Method, ModbusThingIoModel ioArg);
 
 
     }

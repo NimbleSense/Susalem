@@ -1,15 +1,23 @@
-﻿using Susalem.Infrastructure.ThingModel.Model;
+﻿using Quartz.Util;
+using Susalem.Infrastructure.ThingModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Susalem.ThingModel.Test.Models
+namespace Susalem.Infrastructure.ThingModel.Model
 {
-    public class ThingIoModel
+    public class ModbusThingIoModel
     {
         public Guid ID { get; set; }
+
+        public string[] PropertyKeys { get; set; }
+
+        public int FunctionCode { get; set; }
+        public int Length { get; set; }
+
+        public int[] BatchLength { get; set; }
         public string Address { get; set; }
         public object Value { get; set; }
 
@@ -20,5 +28,12 @@ namespace Susalem.ThingModel.Test.Models
         {
             return $"变量ID:{ID},Address:{Address},Value:{Value},ValueType:{ValueType},Endian:{EndianType}";
         }
+
+
+    }
+
+    public class ModbusCommandIoModel: ModbusThingIoModel
+    {
+        public event EventHandler<object> OnWriteCommand;
     }
 }

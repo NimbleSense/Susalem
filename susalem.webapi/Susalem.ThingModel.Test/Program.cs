@@ -11,6 +11,8 @@ using Newtonsoft.Json;
 using Susalem.Messages.Features.Channel;
 using System.Text.Json.Serialization.Metadata;
 using Susalem.Infrastructure.ThingModel.Model;
+using System.Runtime.Serialization.Formatters;
+using System.Collections.Generic;
 
 namespace Susalem.ThingModel.Test
 {
@@ -85,26 +87,48 @@ namespace Susalem.ThingModel.Test
 
         public static void InstantiateDevice()
         {
-            string txt = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,@"Demos\Demo.json"));
+            string txt = File.ReadAllText(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Demos\Demo.json"));
             ThingObject thing = JsonConvert.DeserializeObject<ThingObject>(txt);
-            Appsession.Devices.Add(thing);
+            Appsession.Devices.Add(thing.Name,thing);
 
-            for(int i=0;i< Appsession.Devices.Count;i++)
+            for (int i = 0; i < Appsession.Devices.Count; i++)
             {
-                var comConfigs = Appsession.Devices[i].CommandConfigs;
+                var key = Appsession.Devices.Keys.ElementAt(i);
+                var item = Appsession.Devices[key];
+                List<ModbusThingIoModel> lstIos = new List<ModbusThingIoModel>();
+                for (int j = 0; j < item.ReadConfigs.Count; j++)
+                {
+                    var io = item.ReadConfigs[j];
+                    ModbusThingIoModel ModbusThingIoModel = new ModbusThingIoModel();
+                    ModbusThingIoModel.Address = io.Address;
+                    ModbusThingIoModel.ValueType = io.DataType.Type;
+                    ModbusThingIoModel.FunctionCode = io.FunctionCode;
+                    ModbusThingIoModel.Length = io.Length;
+                    ModbusThingIoModel.EndianType = io.DataType.ByteOrder;
+                    ModbusThingIoModel.PropertyKeys = io.PropertyKeys;
+                    lstIos.Add(ModbusThingIoModel);
+                }
+
+                Appsession.DictReadIoModels.Add(item.Name, lstIos);
+
+                List<ModbusCommandIoModel> lstCommandIoModels = new List<ModbusCommandIoModel>();
+                for(int k = 0; k < item.CommandConfigs.Count; k++)
+                {
+                    var commandIo = item.CommandConfigs[k];
+                    ModbusCommandIoModel ModbusCommandIoModel = new ModbusCommandIoModel();
+                    ModbusCommandIoModel.Address = commandIo.Address;
+                    ModbusCommandIoModel.FunctionCode = commandIo.FunctionCode;
+                    ModbusCommandIoModel.Length = commandIo.Length;
+                    ModbusCommandIoModel.ValueType = commandIo.DataType.Type;
+                    ModbusCommandIoModel.EndianType = commandIo.DataType.ByteOrder;
+                    lstCommandIoModels.Add(ModbusCommandIoModel);
+                }
+
+                Appsession.DictCommandIoModels.Add(item.Name, lstCommandIoModels);
 
 
-                //List<ThingCommandDto> dtos = new List<ThingCommandDto>();
-                //for (int j = 0;j< comConfigs.Count;j++)
-                //{
-                //    var config = comConfigs[j];
-                //    dtos.Add(new ThingCommandDto(config.Name, config.Address, config.Length, config.Expression));
-                //}
-                //Appsession.ThingCommands.Add(Appsession.Devices[i].Name, dtos);
 
             }
-
-
         }
     }
 }

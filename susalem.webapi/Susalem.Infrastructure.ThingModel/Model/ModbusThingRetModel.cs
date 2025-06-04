@@ -8,20 +8,20 @@ using System.Threading.Tasks;
 
 namespace Susalem.Infrastructure.ThingModel.Model
 {
-    public class ThingRetModel
+    public class ModbusThingRetModel
     {
-        public ThingRetModel()
+        public ModbusThingRetModel()
         {
             Timestamp = DateTime.Now;
         }
 
-        public ThingRetModel(VaribaleStatusTypeEnum status)
+        public ModbusThingRetModel(VaribaleStatusTypeEnum status)
         {
             Timestamp = DateTime.Now; ;
             StatusType = status;
         }
 
-        public ThingRetModel(VaribaleStatusTypeEnum status, string message)
+        public ModbusThingRetModel(VaribaleStatusTypeEnum status, string message)
         {
             Timestamp = DateTime.Now;
             StatusType = status;

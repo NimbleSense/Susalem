@@ -1,6 +1,7 @@
 ﻿using Susalem.Core.Application.Interfaces.Services;
 using Susalem.Infrastructure.ThingModel.Interface;
 using Susalem.Infrastructure.ThingModel.Model;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,13 @@ namespace Susalem.ThingModel.Test
 {
     public class Appsession
     {
-        public static List<ThingObject> Devices { get; set; } = new List<ThingObject>();
 
-        public static Dictionary<string, List<ThingCommandDto>> ThingCommands = new Dictionary<string, List<ThingCommandDto>>();
+        public static Dictionary<string, ThingObject> Devices { get; } = new Dictionary<string, ThingObject>();
 
-        public static List<IThingObjectDriver> MonitorDrivers { get; } = new List<IThingObjectDriver>();
+        public static Dictionary<string, List<ModbusThingIoModel>> DictReadIoModels { get; set; } = new Dictionary<string, List<ModbusThingIoModel>>();
+
+        public static Dictionary<string, List<ModbusCommandIoModel>> DictCommandIoModels { get; set; } =new Dictionary<string, List<ModbusCommandIoModel>>();
+
+        public static Dictionary<string, IModbusThingDriver> MonitorDrivers { get; } = new Dictionary<string, IModbusThingDriver>();
     }
 }

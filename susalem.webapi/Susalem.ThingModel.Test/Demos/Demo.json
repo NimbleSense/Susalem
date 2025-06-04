@@ -46,8 +46,9 @@
     {
       "Name": "BasicParams",
       "FunctionCode": 4,
-      "Address": 30002,
-      "Length": 1,
+      "Address": "1|4,30006,12,0",
+      "Length": 0,
+      "BatchLength": [ 8, 4 ],
       "Mode": "Batch",
       "DataType": {
         "Type": 9,
@@ -74,7 +75,7 @@
       "Address": 30001,
       "DataType": {
         "Type": 9,
-        "ByteOrder": 2 // 明确字节顺序
+        "ByteOrder": 2 
       },
       "Expression": "raw / 15.0",
       "Validation": {

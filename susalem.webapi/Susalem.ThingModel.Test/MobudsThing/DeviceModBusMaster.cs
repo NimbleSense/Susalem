@@ -10,12 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using NModbus.Device;
 using Microsoft.Extensions.Logging;
-using Susalem.ThingModel.Test.Models;
 using Susalem.Infrastructure.ThingModel.Model;
+using Susalem.Messages.Features.Channel;
+using Susalem.Infrastructure.ThingModel.Interface;
 
 namespace Susalem.ThingModel.Test.MobudsThing
 {
-    public class DeviceModBusMaster
+    public class DeviceModBusMaster : IModbusThingDriver
     {
         private TcpClient? _tcpClient;
         private UdpClient? _udpClient;
@@ -97,13 +98,30 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// </summary>
         /// <param name="device"></param>
         /// <param name="logger"></param>
-        public DeviceModBusMaster(string device, ILogger logger)
+        public DeviceModBusMaster(MasterType masterType, SerialSetting serialSetting, ILogger logger)
         {
-            _device = device;
+            MasterType = masterType;
+            PortName = serialSetting.PortName;
+            BaudRate = serialSetting.BaudRate;
+            DataBits = serialSetting.DataBits;
+            StopBits = (StopBits)serialSetting.StopBits;
+            Parity = (Parity)serialSetting.Parity;
             _logger = logger;
 
-            _logger.LogInformation($"Device:[{_device}],Create()");
+            _logger.LogInformation($"Rtu Create()");
         }
+
+        public DeviceModBusMaster(MasterType masterType, TcpSetting tcpSetting, ILogger logger)
+        {
+            MasterType = masterType;
+            IpAddress = tcpSetting.Host;
+            Port = tcpSetting.Port;
+            _logger = logger;
+
+            _logger.LogInformation($"Tcp Create()");
+        }
+
+
 
         /// <summary>
         /// 连接状态
@@ -276,7 +294,7 @@ namespace Susalem.ThingModel.Test.MobudsThing
         private Dictionary<string, ushort> _cacheStart = new();
 
         [Method("多地址读取", description: "多地址读取缓存")]
-        public ThingRetModel ReadMultiple(ThingIoModel ioArg)
+        public ModbusThingRetModel ReadMultiple(ModbusThingIoModel ioArg)
         {
             byte slaveId = SlaveAddress;
             if (ioArg.Address.Contains('|'))
@@ -319,7 +337,7 @@ namespace Susalem.ThingModel.Test.MobudsThing
                         break;
                 }
 
-                return new ThingRetModel()
+                return new ModbusThingRetModel()
                 {
                     StatusType = VaribaleStatusTypeEnum.Good,
                     Value = _cache[cacheKey]
@@ -330,7 +348,7 @@ namespace Susalem.ThingModel.Test.MobudsThing
                 _logger.LogError(ex, $"Device:[{_device}],ReadMultiple(),Error");
                 _cache[cacheKey] = null;
                 _cacheStart[cacheKey] = 0;
-                return new ThingRetModel()
+                return new ModbusThingRetModel()
                 {
                     StatusType = VaribaleStatusTypeEnum.Bad
                 };
@@ -343,9 +361,9 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// <param name="ioArg"></param>
         /// <returns></returns>
         [Method("从缓存读取", description: "从缓存读取")]
-        public ThingRetModel ReadFromCache(ThingIoModel ioArg)
+        public ModbusThingRetModel ReadFromCache(ModbusThingIoModel ioArg)
         {
-            ThingRetModel ret = new();
+            ModbusThingRetModel ret = new();
             try
             {
                 string cacheName = _cache.Any() ? _cache.FirstOrDefault().Key : "0";
@@ -479,9 +497,9 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// <param name="ioArg"></param>
         /// <returns></returns>
         [Method("功能码:03", description: "HoldingRegisters读保持寄存器")]
-        public ThingRetModel HoldingRegisters(ThingIoModel ioArg)
+        public ModbusThingRetModel HoldingRegisters(ModbusThingIoModel ioArg)
         {
-            ThingRetModel ret = new();
+            ModbusThingRetModel ret = new();
             try
             {
                 if (IsConnected)
@@ -508,9 +526,9 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// <param name="ioArg"></param>
         /// <returns></returns>
         [Method("功能码:04", description: "HoldingRegisters读输入寄存器")]
-        public ThingRetModel InputRegisters(ThingIoModel ioArg)
+        public ModbusThingRetModel InputRegisters(ModbusThingIoModel ioArg)
         {
-            ThingRetModel ret = new();
+            ModbusThingRetModel ret = new();
             try
             {
                 if (IsConnected)
@@ -537,9 +555,9 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// <param name="ioArg"></param>
         /// <returns></returns>
         [Method("功能码:01", description: "Coil读线圈")]
-        public ThingRetModel Coil(ThingIoModel ioArg)
+        public ModbusThingRetModel Coil(ModbusThingIoModel ioArg)
         {
-            ThingRetModel ret = new();
+            ModbusThingRetModel ret = new();
             try
             {
                 if (IsConnected)
@@ -580,9 +598,9 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// <param name="ioArg"></param>
         /// <returns></returns>
         [Method("功能码:02", description: "Input读输入")]
-        public ThingRetModel Input(ThingIoModel ioArg)
+        public ModbusThingRetModel Input(ModbusThingIoModel ioArg)
         {
-            ThingRetModel ret = new();
+            ModbusThingRetModel ret = new();
             try
             {
                 if (IsConnected)
@@ -618,14 +636,52 @@ namespace Susalem.ThingModel.Test.MobudsThing
         }
 
         [Method("Read方法样例", description: "Read方法样例描述")]
-        public ThingRetModel Read(ThingIoModel ioArg)
+        public ModbusThingRetModel Read(ModbusThingIoModel ioArg, bool isMultiple)
         {
-            ThingRetModel ret = new ThingRetModel
+
+            if (isMultiple)
+                return ReadMultiple(ioArg);
+            else
+            {
+                switch (ioArg.FunctionCode)
+                {
+                    case 1:
+                        {
+                            return Coil(ioArg);
+                        }
+                    case 2:
+                        {
+                            return Input(ioArg);
+                        }
+                    case 3:
+                        {
+                            return HoldingRegisters(ioArg);
+                        }
+                    case 4:
+                        {
+                            return InputRegisters(ioArg);
+                        }
+                    default:
+                        {
+                            return new ModbusThingRetModel
+                            {
+                                Message = "不支持的功能码",
+                                StatusType = VaribaleStatusTypeEnum.MethodError
+                            };
+                        }
+                }
+            }
+        }
+
+        public ModbusThingRetModel Read(ModbusThingIoModel ioArg)
+        {
+            ModbusThingRetModel ret = new ModbusThingRetModel
             {
                 Message = "",
                 StatusType = VaribaleStatusTypeEnum.Good,
                 Value = $"{DeviceId} {DateTime.Now.ToString("O")} Read {ioArg.Address}"
             };
+
             return ret;
         }
 
@@ -636,7 +692,7 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// <param name="method"></param>
         /// <param name="ioArg"></param>
         /// <returns></returns>
-        public async Task<RpcResponse> WriteAsync(string requestId, string method, ThingIoModel ioArg)
+        public async Task<RpcResponse> WriteAsync(string requestId, string method, ModbusThingIoModel ioArg)
         {
             RpcResponse rpcResponse = new() { IsSuccess = false };
             try
@@ -768,9 +824,9 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// <param name="funCode"></param>
         /// <param name="ioArg"></param>
         /// <returns></returns>
-        private ThingRetModel ReadRegistersBuffers(byte funCode, ThingIoModel ioArg)
+        private ModbusThingRetModel ReadRegistersBuffers(byte funCode, ModbusThingIoModel ioArg)
         {
-            ThingRetModel ret = new() { StatusType = VaribaleStatusTypeEnum.Good };
+            ModbusThingRetModel ret = new() { StatusType = VaribaleStatusTypeEnum.Good };
             if (!IsConnected)
                 ret.StatusType = VaribaleStatusTypeEnum.Bad;
             else
@@ -1058,11 +1114,11 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// <param name="startAddress"></param>
         /// <param name="readCount"></param>
         /// <returns></returns>
-        private ThingRetModel AnalyzeAddress(ThingIoModel ioArg, out ushort startAddress,
+        private ModbusThingRetModel AnalyzeAddress(ModbusThingIoModel ioArg, out ushort startAddress,
             out ushort readCount)
         {
             var (slaveAddress, ioAddress) = GetSlaveAddress(ioArg);
-            ThingRetModel ret = new() { StatusType = VaribaleStatusTypeEnum.Good };
+            ModbusThingRetModel ret = new() { StatusType = VaribaleStatusTypeEnum.Good };
             try
             {
                 if (ioArg.ValueType == DataTypeEnum.AsciiString)
@@ -1094,7 +1150,7 @@ namespace Susalem.ThingModel.Test.MobudsThing
         /// </summary>
         /// <param name="ioArg"></param>
         /// <returns></returns>
-        private (byte slaveAddress, string ioAddress) GetSlaveAddress(ThingIoModel ioArg)
+        private (byte slaveAddress, string ioAddress) GetSlaveAddress(ModbusThingIoModel ioArg)
         {
             byte slaveAddress = SlaveAddress;
             string ioAddress = ioArg.Address;

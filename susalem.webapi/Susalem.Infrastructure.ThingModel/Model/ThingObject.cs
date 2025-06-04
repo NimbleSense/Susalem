@@ -202,17 +202,23 @@ namespace Susalem.Infrastructure.ThingModel.Model
 
         public int Length { get; set; }
 
+        public int[] BatchLength { get; set; }
+
         public string Address { get; set; }
 
         public string Mode { get; set; }
 
         public string Expression { get; set; }
-        public Trigger Trigger { get; set; }
+
+
+        //public Trigger Trigger { get; set; }
+
+        public DataType DataType { get; set; }
 
         /// <summary>
         /// 关联属性
         /// </summary>
-        public List<string> PropertyKeys { get; set; }
+        public string[] PropertyKeys { get; set; }
 
         public Optimization Optimization { get; set; }
 
@@ -258,6 +264,11 @@ namespace Susalem.Infrastructure.ThingModel.Model
         //public Trigger Trigger { get; set; }
         public int FunctionCode { get; set; }
 
+        /// <summary>
+        /// 读取或者写入的长度
+        /// </summary>
+        public int Length { get; set; }
+
         public event EventHandler<object> OnWriteCommand
         {
             add
@@ -268,10 +279,7 @@ namespace Susalem.Infrastructure.ThingModel.Model
             remove { OnWriteCommand -= value; }
         }
 
-        /// <summary>
-        /// 读取或者写入的长度
-        /// </summary>
-        public int Length { get; set; }
+        
 
         public DataType DataType { get; set; }
 
