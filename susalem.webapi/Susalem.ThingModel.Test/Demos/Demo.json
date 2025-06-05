@@ -63,6 +63,27 @@
         "MergeAdjacent": true, // 自动合并相邻地址
         "RetryPolicy": "ExponentialBackoff"
       }
+    },
+    {
+      "Name": "Temp",
+      "FunctionCode": 4,
+      "Address": "40001",
+      "Length": 4,
+      "BatchLength": [ 8, 4 ],
+      "Mode": "Batch",
+      "DataType": {
+        "Type": 9,
+        "ByteOrder": 2 // 明确字节顺序
+      },
+      "Trigger": {
+        "Type": 0, // 定时触发
+        "Interval": 5000
+      },
+      "PropertyKeys": [ "Temp" ], // 关联属性
+      "Optimization": {
+        "MergeAdjacent": true, // 自动合并相邻地址
+        "RetryPolicy": "ExponentialBackoff"
+      }
     }
   ],
 
@@ -75,7 +96,23 @@
       "Address": 30001,
       "DataType": {
         "Type": 9,
-        "ByteOrder": 2 
+        "ByteOrder": 2
+      },
+      "Expression": "raw / 15.0",
+      "Validation": {
+        "Min": 0.0,
+        "Max": 100.0
+      }
+    },
+    {
+      "Key": "SetTemp",
+      "Name": "设置温度",
+      "FunctionCode": 16,
+      "Length": 1,
+      "Address": 30001,
+      "DataType": {
+        "Type": 9,
+        "ByteOrder": 2
       },
       "Expression": "raw / 15.0",
       "Validation": {
